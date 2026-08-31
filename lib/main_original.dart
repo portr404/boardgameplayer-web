@@ -17,10 +17,7 @@ const List<IconData> playerIcons = <IconData>[
 ];
 
 class MyApp extends StatelessWidget {
-  const MyApp({
-    super.key,
-    required this.database,
-  });
+  const MyApp({super.key, required this.database});
 
   final AppDatabase database;
 
@@ -30,9 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Board Game Manager',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF5B4BDB),
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF5B4BDB)),
         useMaterial3: true,
       ),
       home: HomePage(database: database),
