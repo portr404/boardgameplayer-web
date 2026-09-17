@@ -207,7 +207,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Dadi'), findsOneWidget);
-    expect(find.text('Lancia ancora'), findsOneWidget);
+    expect(find.text('Lancia'), findsOneWidget);
     expect(find.text('Chiudi'), findsOneWidget);
     expect(find.text('d20'), findsNWidgets(2));
   });

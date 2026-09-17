@@ -1,4 +1,4 @@
-package com.example.progettino_ios
+package it.francescofasolato.boardgameplayer
 
 import io.flutter.embedding.android.FlutterActivity
 

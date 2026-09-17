@@ -697,9 +697,8 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
       games: games,
     );
 
-    await Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (_) => page),
-    );
+    await Navigator.of(context)
+        .push(MaterialPageRoute<void>(builder: (_) => page));
 
     if (mounted) {
       setState(() {});
