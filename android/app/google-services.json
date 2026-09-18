@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "822002297591",
+    "project_id": "boardgameplayer-6f963",
+    "storage_bucket": "boardgameplayer-6f963.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822002297591:android:509c80ea85df11f11d81f2",
+        "android_client_info": {
+          "package_name": "it.francescofasolato.boardgameplayer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAqMiuvL155oxb9MzfZ-hTWg4Y1OjGB2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

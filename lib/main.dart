@@ -2,12 +2,19 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'firebase_options.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -97,7 +104,219 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'BoardGamePlayer',
       theme: darkTheme,
-      home: const GamesPage(),
+      home: const AuthGate(),
+    );
+  }
+}
+
+class AuthGate extends StatelessWidget {
+  const AuthGate({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    if (Firebase.apps.isEmpty) {
+      return const GamesPage();
+    }
+
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+        return snapshot.data == null ? const AuthPage() : const GamesPage();
+      },
+    );
+  }
+}
+
+class AuthPage extends StatefulWidget {
+  const AuthPage({super.key});
+
+  @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _isRegistering = false;
+  bool _busy = false;
+  String? _error;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submitEmail() async {
+    if (!_formKey.currentState!.validate()) return;
+    setState(() {
+      _busy = true;
+      _error = null;
+    });
+    try {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      if (_isRegistering) {
+        await auth.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+        );
+      } else {
+        await auth.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+        );
+      }
+    } on FirebaseAuthException catch (exception) {
+      setState(() => _error = _authMessage(exception.code));
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _signInWithGoogle() async {
+    setState(() {
+      _busy = true;
+      _error = null;
+    });
+    try {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final GoogleAuthProvider provider = GoogleAuthProvider();
+      if (kIsWeb) {
+        await auth.signInWithPopup(provider);
+      } else {
+        await auth.signInWithProvider(provider);
+      }
+    } on FirebaseAuthException catch (exception) {
+      setState(() => _error = _authMessage(exception.code));
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  String _authMessage(String code) {
+    switch (code) {
+      case 'email-already-in-use':
+        return 'Questa email è già registrata.';
+      case 'invalid-credential':
+      case 'wrong-password':
+      case 'user-not-found':
+        return 'Email o password non corrette.';
+      case 'weak-password':
+        return 'La password deve contenere almeno 6 caratteri.';
+      case 'popup-closed-by-user':
+        return 'Accesso Google annullato.';
+      default:
+        return 'Accesso non riuscito. Riprova.';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 440),
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(28),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Icon(Icons.auto_awesome, size: 56),
+                      const SizedBox(height: 16),
+                      Text(
+                        'BoardGamePlayer',
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Accedi per ritrovare le tue partite su ogni dispositivo.',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      const SizedBox(height: 24),
+                      TextFormField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: const InputDecoration(labelText: 'Email'),
+                        validator: (String? value) =>
+                            value == null || !value.contains('@')
+                            ? 'Inserisci un’email valida'
+                            : null,
+                      ),
+                      const SizedBox(height: 12),
+                      TextFormField(
+                        controller: _passwordController,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          labelText: 'Password',
+                        ),
+                        validator: (String? value) =>
+                            value == null || value.length < 6
+                            ? 'Almeno 6 caratteri'
+                            : null,
+                      ),
+                      if (_error != null) ...<Widget>[
+                        const SizedBox(height: 12),
+                        Text(
+                          _error!,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                        ),
+                      ],
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        width: double.infinity,
+                        child: FilledButton(
+                          onPressed: _busy ? null : _submitEmail,
+                          child: Text(
+                            _isRegistering ? 'Crea account' : 'Accedi',
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: _busy
+                            ? null
+                            : () => setState(() {
+                                _isRegistering = !_isRegistering;
+                                _error = null;
+                              }),
+                        child: Text(
+                          _isRegistering
+                              ? 'Ho già un account'
+                              : 'Crea un nuovo account',
+                        ),
+                      ),
+                      const Divider(height: 24),
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton.icon(
+                          onPressed: _busy ? null : _signInWithGoogle,
+                          icon: const Icon(Icons.login),
+                          label: const Text('Continua con Google'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -498,6 +717,7 @@ class Game {
 
 class GameStore {
   static const String key = 'board_game_player_games';
+  static const String _gamesField = 'games';
   Future<void> _lastSave = Future<void>.value();
   SharedPreferences? _cachedPreferences;
 
@@ -508,15 +728,73 @@ class GameStore {
   Future<List<Game>> load() async {
     final SharedPreferences preferences = await _getPreferences();
     final String? raw = preferences.getString(key);
-    if (raw == null) return <Game>[];
+    final List<Game> localGames = _decode(raw);
+
+    final User? user = _currentUser;
+    if (user == null) return localGames;
 
     try {
-      return (jsonDecode(raw) as List<dynamic>)
+      final DocumentSnapshot<Map<String, dynamic>> snapshot =
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .get();
+      final dynamic remoteGames = snapshot.data()?[_gamesField];
+      if (remoteGames is List<dynamic>) {
+        final List<Game> games = _decodeList(remoteGames);
+        await preferences.setString(
+          key,
+          jsonEncode(games.map((Game game) => game.toJson()).toList()),
+        );
+        return games;
+      }
+      if (localGames.isNotEmpty) {
+        await _saveToCloud(user, localGames);
+      }
+    } on FirebaseException {
+      return localGames;
+    }
+
+    return localGames;
+  }
+
+  List<Game> _decode(String? raw) {
+    if (raw == null) return <Game>[];
+    try {
+      return _decodeList(jsonDecode(raw) as List<dynamic>);
+    } catch (_) {
+      return <Game>[];
+    }
+  }
+
+  List<Game> _decodeList(List<dynamic> rawGames) {
+    try {
+      return rawGames
           .map((dynamic item) => Game.fromJson(item as Map<String, dynamic>))
           .toList();
     } catch (_) {
       return <Game>[];
     }
+  }
+
+  User? get _currentUser {
+    try {
+      return FirebaseAuth.instance.currentUser;
+    } on FirebaseException {
+      return null;
+    } on StateError {
+      return null;
+    }
+  }
+
+  Future<void> _saveToCloud(User user, List<Game> games) {
+    return FirebaseFirestore.instance.collection('users').doc(user.uid).set(
+      <String, dynamic>{
+        _gamesField: games.map((Game game) => game.toJson()).toList(),
+        'updatedAt': FieldValue.serverTimestamp(),
+      },
+      SetOptions(merge: true),
+    );
   }
 
   Future<void> save(List<Game> games) async {
@@ -527,6 +805,14 @@ class GameStore {
         jsonEncode(games.map((Game game) => game.toJson()).toList()),
       );
       if (!saved) throw StateError('Salvataggio locale non riuscito.');
+      final User? user = _currentUser;
+      if (user != null) {
+        try {
+          await _saveToCloud(user, games);
+        } on FirebaseException {
+          // Local persistence remains available when the network is offline.
+        }
+      }
     });
     await _lastSave;
   }
@@ -547,6 +833,7 @@ class DiceLauncherButton extends StatelessWidget {
     return SizedBox(
       width: 200,
       child: FloatingActionButton.extended(
+        heroTag: 'dice-launcher-main',
         onPressed: onPressed,
         tooltip: label,
         backgroundColor: const Color(0xFF8B7CFF),
@@ -711,7 +998,16 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('BoardGamePlayer')),
+      appBar: AppBar(
+        title: const Text('BoardGamePlayer'),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () => FirebaseAuth.instance.signOut(),
+            tooltip: 'Esci dall’account',
+            icon: const Icon(Icons.logout),
+          ),
+        ],
+      ),
       floatingActionButton: loading
           ? null
           : Row(
@@ -719,6 +1015,7 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
               children: <Widget>[
                 const SizedBox(width: 16),
                 FloatingActionButton(
+                  heroTag: 'create-game',
                   onPressed: addGame,
                   tooltip: 'Crea una partita',
                   child: const Icon(Icons.add),

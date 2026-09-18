@@ -1,0 +1,28 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "boardgameplayer-6f963",
+          "appId": "1:822002297591:android:509c80ea85df11f11d81f2",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "boardgameplayer-6f963",
+          "configurations": {
+            "android": "1:822002297591:android:509c80ea85df11f11d81f2",
+            "ios": "1:822002297591:ios:86c668d5928284591d81f2",
+            "macos": "1:822002297591:ios:86c668d5928284591d81f2",
+            "web": "1:822002297591:web:5cd4b96c04a7f83b1d81f2",
+            "windows": "1:822002297591:web:8b6e4e79714a7e2b1d81f2"
+          }
+        }
+      }
+    }
+  }
+}
