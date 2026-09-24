@@ -1,0 +1,10 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "Get-Command": true,
+        "/^node --version; npm --version; dart --version; flutter --version$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "winget": true
+    }
+}
