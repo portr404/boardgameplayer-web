@@ -9,8 +9,105 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'firebase_options.dart';
+
+abstract final class AppDesign {
+  static const Color ink = Color(0xFF071417);
+  static const Color canvas = Color(0xFF0A1719);
+  static const Color panel = Color(0xFF102326);
+  static const Color panelRaised = Color(0xFF153034);
+  static const Color teal = Color(0xFF54D6C2);
+  static const Color tealDeep = Color(0xFF167E79);
+  static const Color gold = Color(0xFFE4B85D);
+  static const Color goldSoft = Color(0xFFFFD88A);
+  static const Color text = Color(0xFFF4F0E7);
+  static const Color textMuted = Color(0xFF9EB4B1);
+  static const Color danger = Color(0xFFE88779);
+  static const double radiusSmall = 12;
+  static const double radiusMedium = 20;
+  static const double radiusLarge = 28;
+  static const Duration motionFast = Duration(milliseconds: 180);
+  static const Duration motionMedium = Duration(milliseconds: 320);
+  static const Curve motionCurve = Curves.easeOutCubic;
+
+  static const LinearGradient backgroundGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: <Color>[Color(0xFF071417), Color(0xFF0C2022), Color(0xFF0A1719)],
+  );
+}
+
+class BoardBackdrop extends StatelessWidget {
+  const BoardBackdrop({super.key, required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: const BoxDecoration(gradient: AppDesign.backgroundGradient),
+      child: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: IgnorePointer(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: <Color>[
+                      Colors.white.withValues(alpha: 0.025),
+                      Colors.transparent,
+                      AppDesign.teal.withValues(alpha: 0.035),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned.fill(child: child),
+        ],
+      ),
+    );
+  }
+}
+
+class CreditsFooter extends StatelessWidget {
+  const CreditsFooter({super.key});
+
+  Future<void> _openContactEmail() async {
+    final Uri email = Uri(
+      scheme: 'mailto',
+      path: 'portr404@gmail.com',
+      queryParameters: <String, String>{
+        'subject': 'BoardGamePlayer - segnalazione o recensione',
+        'body': 'Ciao Francesco,\n\n',
+      },
+    );
+    await launchUrl(email);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      link: true,
+      label: 'Contatta Francesco Fasolato per segnalazioni o recensioni',
+      child: TextButton(
+        onPressed: _openContactEmail,
+        style: TextButton.styleFrom(
+          foregroundColor: AppDesign.textMuted,
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          minimumSize: const Size(48, 32),
+          tapTargetSize: MaterialTapTargetSize.padded,
+          textStyle: const TextStyle(fontSize: 11, letterSpacing: 0.2),
+        ),
+        child: const Text('Creato da Francesco Fasolato'),
+      ),
+    );
+  }
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,57 +144,92 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme darkScheme = ColorScheme.fromSeed(
-      seedColor: const Color(0xFF7C5CFF),
+      seedColor: AppDesign.teal,
       brightness: Brightness.dark,
-      primary: const Color(0xFF8B7CFF),
-      secondary: const Color(0xFF5BE4D5),
-      tertiary: const Color(0xFFFFC857),
+      primary: AppDesign.teal,
+      onPrimary: AppDesign.ink,
+      secondary: AppDesign.gold,
+      onSecondary: AppDesign.ink,
+      tertiary: AppDesign.goldSoft,
     );
 
     final ThemeData darkTheme = ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
       colorScheme: darkScheme,
-      scaffoldBackgroundColor: const Color(0xFF090D18),
+      scaffoldBackgroundColor: AppDesign.canvas,
+      fontFamily: 'Trebuchet MS',
       appBarTheme: const AppBarTheme(
-        backgroundColor: Color(0xFF111827),
-        foregroundColor: Colors.white,
+        backgroundColor: AppDesign.canvas,
+        foregroundColor: AppDesign.text,
         elevation: 0,
         scrolledUnderElevation: 0,
+        centerTitle: false,
+        titleTextStyle: TextStyle(
+          color: AppDesign.text,
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 0.2,
+        ),
       ),
       cardTheme: CardThemeData(
-        color: const Color(0xFF121A2E),
-        elevation: 6,
-        shadowColor: const Color(0xFF7C5CFF).withValues(alpha: 0.25),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        color: AppDesign.panel,
+        elevation: 0,
+        shadowColor: AppDesign.teal.withValues(alpha: 0.16),
+        margin: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppDesign.radiusMedium),
+          side: BorderSide(color: Colors.white.withValues(alpha: 0.08)),
+        ),
       ),
       dialogTheme: DialogThemeData(
-        backgroundColor: const Color(0xFF121A2E),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
+        backgroundColor: AppDesign.panel,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppDesign.radiusLarge),
+          side: BorderSide(color: Colors.white.withValues(alpha: 0.08)),
+        ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: darkScheme.primary,
-        foregroundColor: Colors.white,
+        foregroundColor: AppDesign.ink,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppDesign.radiusMedium),
+        ),
       ),
       chipTheme: ChipThemeData(
-        backgroundColor: const Color(0xFF18233A),
-        selectedColor: const Color(0xFF7C5CFF),
-        secondarySelectedColor: const Color(0xFF7C5CFF),
-        labelStyle: const TextStyle(color: Colors.white),
-        side: const BorderSide(color: Colors.transparent),
+        backgroundColor: AppDesign.panelRaised,
+        selectedColor: AppDesign.tealDeep,
+        secondarySelectedColor: AppDesign.tealDeep,
+        labelStyle: const TextStyle(color: AppDesign.text),
+        side: BorderSide(color: Colors.white.withValues(alpha: 0.08)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppDesign.radiusSmall),
+        ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: const Color(0xFF131C31),
+        fillColor: AppDesign.ink.withValues(alpha: 0.45),
+        labelStyle: const TextStyle(color: AppDesign.textMuted),
+        floatingLabelStyle: const TextStyle(color: AppDesign.teal),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: Color(0xFF2B3A56)),
+          borderRadius: BorderRadius.circular(AppDesign.radiusSmall),
+          borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.12)),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: Color(0xFF2B3A56)),
+          borderRadius: BorderRadius.circular(AppDesign.radiusSmall),
+          borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.12)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppDesign.radiusSmall),
+          borderSide: const BorderSide(color: AppDesign.teal, width: 2),
         ),
       ),
+      dividerTheme: DividerThemeData(
+        color: Colors.white.withValues(alpha: 0.08),
+        space: 1,
+      ),
+      visualDensity: VisualDensity.standard,
     );
 
     return MaterialApp(
@@ -220,101 +352,168 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 440),
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(28),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      const Icon(Icons.auto_awesome, size: 56),
-                      const SizedBox(height: 16),
-                      Text(
-                        'BoardGamePlayer',
-                        style: Theme.of(context).textTheme.headlineSmall,
+      body: BoardBackdrop(
+        child: Stack(
+          children: <Widget>[
+            Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(24, 24, 24, 56),
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 460),
+                  child: Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.035),
+                      borderRadius: BorderRadius.circular(
+                        AppDesign.radiusLarge,
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Accedi per ritrovare le tue partite su ogni dispositivo.',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium,
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: 0.08),
                       ),
-                      const SizedBox(height: 24),
-                      TextFormField(
-                        controller: _emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: const InputDecoration(labelText: 'Email'),
-                        validator: (String? value) =>
-                            value == null || !value.contains('@')
-                            ? 'Inserisci un’email valida'
-                            : null,
-                      ),
-                      const SizedBox(height: 12),
-                      TextFormField(
-                        controller: _passwordController,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          labelText: 'Password',
-                        ),
-                        validator: (String? value) =>
-                            value == null || value.length < 6
-                            ? 'Almeno 6 caratteri'
-                            : null,
-                      ),
-                      if (_error != null) ...<Widget>[
-                        const SizedBox(height: 12),
-                        Text(
-                          _error!,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.error,
+                    ),
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(28, 30, 28, 26),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Semantics(
+                                label: 'Logo BoardGamePlayer',
+                                child: Container(
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: AppDesign.gold.withValues(
+                                      alpha: 0.12,
+                                    ),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.auto_awesome,
+                                    size: 34,
+                                    color: AppDesign.goldSoft,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              Text(
+                                'BOARDGAMEPLAYER',
+                                style: Theme.of(context).textTheme.labelMedium
+                                    ?.copyWith(
+                                      color: AppDesign.goldSoft,
+                                      letterSpacing: 2.4,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                _isRegistering
+                                    ? 'Apri il tuo tavolo'
+                                    : 'Bentornato al tavolo',
+                                style: Theme.of(context).textTheme.headlineSmall
+                                    ?.copyWith(fontWeight: FontWeight.w700),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                'Accedi per ritrovare le tue partite su ogni dispositivo.',
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.bodyMedium
+                                    ?.copyWith(color: AppDesign.textMuted),
+                              ),
+                              const SizedBox(height: 26),
+                              TextFormField(
+                                controller: _emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: const InputDecoration(
+                                  labelText: 'Email',
+                                  prefixIcon: Icon(Icons.alternate_email),
+                                ),
+                                validator: (String? value) =>
+                                    value == null || !value.contains('@')
+                                    ? 'Inserisci un’email valida'
+                                    : null,
+                              ),
+                              const SizedBox(height: 12),
+                              TextFormField(
+                                controller: _passwordController,
+                                obscureText: true,
+                                decoration: const InputDecoration(
+                                  labelText: 'Password',
+                                  prefixIcon: Icon(Icons.lock_outline),
+                                ),
+                                validator: (String? value) =>
+                                    value == null || value.length < 6
+                                    ? 'Almeno 6 caratteri'
+                                    : null,
+                              ),
+                              if (_error != null) ...<Widget>[
+                                const SizedBox(height: 12),
+                                Text(
+                                  _error!,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Theme.of(context).colorScheme.error,
+                                  ),
+                                ),
+                              ],
+                              const SizedBox(height: 20),
+                              SizedBox(
+                                width: double.infinity,
+                                child: FilledButton.icon(
+                                  onPressed: _busy ? null : _submitEmail,
+                                  icon: Icon(
+                                    _isRegistering
+                                        ? Icons.person_add
+                                        : Icons.login,
+                                  ),
+                                  label: Text(
+                                    _isRegistering ? 'Crea account' : 'Accedi',
+                                  ),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: _busy
+                                    ? null
+                                    : () => setState(() {
+                                        _isRegistering = !_isRegistering;
+                                        _error = null;
+                                      }),
+                                child: Text(
+                                  _isRegistering
+                                      ? 'Ho già un account'
+                                      : 'Crea un nuovo account',
+                                ),
+                              ),
+                              const Divider(height: 24),
+                              SizedBox(
+                                width: double.infinity,
+                                child: OutlinedButton.icon(
+                                  onPressed: _busy ? null : _signInWithGoogle,
+                                  icon: const Icon(
+                                    Icons.g_mobiledata,
+                                    size: 28,
+                                  ),
+                                  label: const Text('Continua con Google'),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                      const SizedBox(height: 20),
-                      SizedBox(
-                        width: double.infinity,
-                        child: FilledButton(
-                          onPressed: _busy ? null : _submitEmail,
-                          child: Text(
-                            _isRegistering ? 'Crea account' : 'Accedi',
-                          ),
-                        ),
                       ),
-                      TextButton(
-                        onPressed: _busy
-                            ? null
-                            : () => setState(() {
-                                _isRegistering = !_isRegistering;
-                                _error = null;
-                              }),
-                        child: Text(
-                          _isRegistering
-                              ? 'Ho già un account'
-                              : 'Crea un nuovo account',
-                        ),
-                      ),
-                      const Divider(height: 24),
-                      SizedBox(
-                        width: double.infinity,
-                        child: OutlinedButton.icon(
-                          onPressed: _busy ? null : _signInWithGoogle,
-                          icon: const Icon(Icons.login),
-                          label: const Text('Continua con Google'),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
+            const Positioned(
+              left: 16,
+              right: 16,
+              bottom: 4,
+              child: Center(child: CreditsFooter()),
+            ),
+          ],
         ),
       ),
     );
@@ -451,9 +650,17 @@ class _DiceRollSheetState extends State<DiceRollSheet> {
     final bool isExtreme =
         _result != null && (_result == 1 || _result == _selectedDie.faces);
 
-    final Widget resultDisplay = Container(
-      width: 220,
-      height: 220,
+    final double resultSize = (MediaQuery.sizeOf(context).width - 64).clamp(
+      160.0,
+      220.0,
+    );
+    final Widget resultDisplay = AnimatedContainer(
+      duration: MediaQuery.disableAnimationsOf(context)
+          ? Duration.zero
+          : AppDesign.motionMedium,
+      curve: AppDesign.motionCurve,
+      width: resultSize,
+      height: resultSize,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(32),
@@ -486,13 +693,17 @@ class _DiceRollSheetState extends State<DiceRollSheet> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
-            '${_result ?? 1}',
-            style: const TextStyle(
-              fontSize: 78,
-              fontWeight: FontWeight.w800,
-              color: Colors.white,
-              height: 1,
+          Semantics(
+            liveRegion: true,
+            label: 'Risultato ${_result ?? 1} sul dado ${_selectedDie.label}',
+            child: Text(
+              '${_result ?? 1}',
+              style: const TextStyle(
+                fontSize: 78,
+                fontWeight: FontWeight.w800,
+                color: Colors.white,
+                height: 1,
+              ),
             ),
           ),
           const SizedBox(height: 8),
@@ -575,8 +786,8 @@ class _DiceRollSheetState extends State<DiceRollSheet> {
                   child: FilledButton.tonal(
                     onPressed: _rollDice,
                     style: FilledButton.styleFrom(
-                      backgroundColor: const Color(0xFF8B7CFF),
-                      foregroundColor: Colors.white,
+                      backgroundColor: AppDesign.teal,
+                      foregroundColor: AppDesign.ink,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
                     child: const Text('Lancia'),
@@ -836,8 +1047,8 @@ class DiceLauncherButton extends StatelessWidget {
         heroTag: 'dice-launcher-main',
         onPressed: onPressed,
         tooltip: label,
-        backgroundColor: const Color(0xFF8B7CFF),
-        foregroundColor: Colors.white,
+        backgroundColor: AppDesign.teal,
+        foregroundColor: AppDesign.ink,
         elevation: 10,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
         icon: const Icon(Icons.casino),
@@ -1018,54 +1229,19 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                   heroTag: 'create-game',
                   onPressed: addGame,
                   tooltip: 'Crea una partita',
+                  backgroundColor: AppDesign.gold,
+                  foregroundColor: AppDesign.ink,
                   child: const Icon(Icons.add),
                 ),
               ],
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: SafeArea(
-        child: DecoratedBox(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[
-                Color(0xFF0B1020),
-                Color(0xFF111A2F),
-                Color(0xFF090D18),
-              ],
-            ),
-          ),
+        child: BoardBackdrop(
           child: loading
               ? const Center(child: CircularProgressIndicator())
               : Stack(
                   children: <Widget>[
-                    Positioned(
-                      top: -80,
-                      right: -40,
-                      child: Container(
-                        width: 220,
-                        height: 220,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: const Color(0xFF7C5CFF)
-                              .withValues(alpha: 0.14),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 120,
-                      left: -60,
-                      child: Container(
-                        width: 180,
-                        height: 180,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: const Color(0xFF5BE4D5)
-                              .withValues(alpha: 0.08),
-                        ),
-                      ),
-                    ),
                     Center(
                       child: ConstrainedBox(
                         constraints: const BoxConstraints(maxWidth: 900),
@@ -1079,16 +1255,41 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                                 ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const <Widget>[
-                                    Icon(
-                                      Icons.casino_outlined,
-                                      size: 56,
-                                      color: Colors.grey,
+                                  children: <Widget>[
+                                    Container(
+                                      padding: const EdgeInsets.all(18),
+                                      decoration: BoxDecoration(
+                                        color: AppDesign.teal.withValues(
+                                          alpha: 0.10,
+                                        ),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
+                                        Icons.casino_outlined,
+                                        size: 42,
+                                        color: AppDesign.teal,
+                                      ),
                                     ),
-                                    SizedBox(height: 16),
+                                    const SizedBox(height: 18),
                                     Text(
-                                      'Nessuna partita presente',
+                                      'Il tavolo è pronto',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      'Crea la prima partita per iniziare la serata.',
                                       textAlign: TextAlign.center,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(
+                                            color: AppDesign.textMuted,
+                                          ),
                                     ),
                                   ],
                                 ),
@@ -1105,32 +1306,60 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                                     const SizedBox(height: 12),
                                 itemBuilder: (BuildContext context, int index) {
                                   final Game game = games[index];
-                                  return Card(
-                                    key: ValueKey<String>(game.id),
-                                    elevation: 6,
-                                    child: ListTile(
+                                  return Semantics(
+                                    button: true,
+                                    label: 'Apri partita ${game.name}',
+                                    child: Container(
                                       key: ValueKey<String>(game.id),
-                                      onTap: () => openGame(game),
-                                      leading: const CircleAvatar(
-                                        backgroundColor: Color(0xFF1D2842),
-                                        child: Icon(
-                                          Icons.games_rounded,
-                                          color: Color(0xFF8B7CFF),
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withValues(
+                                          alpha: 0.035,
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                          AppDesign.radiusMedium,
+                                        ),
+                                        border: Border.all(
+                                          color: Colors.white.withValues(
+                                            alpha: 0.07,
+                                          ),
                                         ),
                                       ),
-                                      title: Text(
-                                        game.name,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                      child: Card(
+                                        child: ListTile(
+                                          onTap: () => openGame(game),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                                horizontal: 16,
+                                                vertical: 8,
+                                              ),
+                                          leading: const CircleAvatar(
+                                            backgroundColor: AppDesign.tealDeep,
+                                            child: Icon(
+                                              Icons.games_rounded,
+                                              color: AppDesign.goldSoft,
+                                            ),
+                                          ),
+                                          title: Text(
+                                            game.name,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                          subtitle: Text(
+                                            '${game.players.length} giocatori • Aggiornata il ${dateLabel(game.updatedAt)}',
+                                            style: const TextStyle(
+                                              color: AppDesign.textMuted,
+                                            ),
+                                          ),
+                                          trailing: IconButton(
+                                            onPressed: () => deleteGame(game),
+                                            icon: const Icon(
+                                              Icons.delete_outline,
+                                            ),
+                                            tooltip: 'Elimina partita',
+                                          ),
                                         ),
-                                      ),
-                                      subtitle: Text(
-                                        '${game.players.length} giocatori • Aggiornata il ${dateLabel(game.updatedAt)}',
-                                      ),
-                                      trailing: IconButton(
-                                        onPressed: () => deleteGame(game),
-                                        icon: const Icon(Icons.delete_outline),
-                                        tooltip: 'Elimina partita',
                                       ),
                                     ),
                                   );
@@ -1141,12 +1370,18 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                     Positioned(
                       left: 0,
                       right: 0,
-                      bottom: 20,
+                      bottom: 34,
                       child: Center(
                         child: DiceLauncherButton(
                           onPressed: () => showDiceSheet(context),
                         ),
                       ),
+                    ),
+                    const Positioned(
+                      left: 16,
+                      right: 16,
+                      bottom: 2,
+                      child: Center(child: CreditsFooter()),
                     ),
                   ],
                 ),
@@ -1485,11 +1720,11 @@ class _GameDetailPageState extends State<GameDetailPage>
             onPressed: game.players.isEmpty ? null : selectFirstPlayer,
             tooltip: 'Estrai primo giocatore',
             backgroundColor: game.players.isEmpty
-                ? Colors.grey.shade700
-                : const Color(0xFF8B7CFF),
+                ? AppDesign.panelRaised
+                : AppDesign.gold,
             foregroundColor: game.players.isEmpty
-                ? Colors.grey.shade400
-                : Colors.white,
+                ? AppDesign.textMuted
+                : AppDesign.ink,
             elevation: 12,
             child: const Icon(Icons.workspace_premium_rounded),
           )
@@ -1498,11 +1733,11 @@ class _GameDetailPageState extends State<GameDetailPage>
             onPressed: game.players.isEmpty ? null : selectFirstPlayer,
             tooltip: 'Estrai primo giocatore',
             backgroundColor: game.players.isEmpty
-                ? Colors.grey.shade700
-                : const Color(0xFF8B7CFF),
+                ? AppDesign.panelRaised
+                : AppDesign.gold,
             foregroundColor: game.players.isEmpty
-                ? Colors.grey.shade400
-                : Colors.white,
+                ? AppDesign.textMuted
+                : AppDesign.ink,
             elevation: 12,
             icon: const Icon(Icons.workspace_premium_rounded),
             label: const Text('Estrai primo giocatore'),
@@ -1513,8 +1748,8 @@ class _GameDetailPageState extends State<GameDetailPage>
             heroTag: 'dice-launcher',
             onPressed: () => showDiceSheet(context),
             tooltip: 'Lancia dadi',
-            backgroundColor: const Color(0xFF8B7CFF),
-            foregroundColor: Colors.white,
+            backgroundColor: AppDesign.teal,
+            foregroundColor: AppDesign.ink,
             elevation: 12,
             child: const Icon(Icons.casino),
           )
@@ -1522,8 +1757,8 @@ class _GameDetailPageState extends State<GameDetailPage>
             heroTag: 'dice-launcher',
             onPressed: () => showDiceSheet(context),
             tooltip: 'Lancia dadi',
-            backgroundColor: const Color(0xFF8B7CFF),
-            foregroundColor: Colors.white,
+            backgroundColor: AppDesign.teal,
+            foregroundColor: AppDesign.ink,
             elevation: 12,
             icon: const Icon(Icons.casino),
             label: const Text('Lancia dadi'),
@@ -1540,47 +1775,12 @@ class _GameDetailPageState extends State<GameDetailPage>
         title: Text(game.name),
       ),
       body: SafeArea(
-        child: DecoratedBox(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[
-                Color(0xFF0B1020),
-                Color(0xFF111A2F),
-                Color(0xFF090D18),
-              ],
-            ),
-          ),
+        child: BoardBackdrop(
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1000),
               child: Stack(
                 children: <Widget>[
-                  Positioned(
-                    top: -60,
-                    left: -40,
-                    child: Container(
-                      width: 200,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: const Color(0xFF7C5CFF).withValues(alpha: 0.12),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 90,
-                    right: -40,
-                    child: Container(
-                      width: 220,
-                      height: 220,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: const Color(0xFF5BE4D5).withValues(alpha: 0.08),
-                      ),
-                    ),
-                  ),
                   game.players.isEmpty
                       ? const Center(child: Text('Nessun giocatore presente'))
                       : ListView.separated(
@@ -1641,8 +1841,8 @@ class _GameDetailPageState extends State<GameDetailPage>
                             heroTag: 'add-player',
                             onPressed: () => addOrEditPlayer(),
                             tooltip: 'Aggiungi giocatore',
-                            backgroundColor: const Color(0xFF5BE4D5),
-                            foregroundColor: const Color(0xFF0B1020),
+                            backgroundColor: AppDesign.teal,
+                            foregroundColor: AppDesign.ink,
                             elevation: 10,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18),
@@ -1702,186 +1902,225 @@ class PlayerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BorderSide selectedBorder = BorderSide(
-      color: isSelected ? Colors.red : Colors.transparent,
+      color: isSelected ? AppDesign.gold : Colors.transparent,
       width: isSelected ? 2 : 1,
     );
+    final bool reduceMotion = MediaQuery.disableAnimationsOf(context);
 
     return Semantics(
       label: isSelected ? '${player.name}, primo giocatore' : player.name,
       selected: isSelected,
       child: AnimatedScale(
         scale: isSelected && isHighlightAnimating ? 1.02 : 1,
-        duration: const Duration(milliseconds: 180),
-        curve: Curves.easeOutBack,
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          color: isSelected ? Colors.red.withValues(alpha: 0.04) : null,
-          shape: RoundedRectangleBorder(
-            side: selectedBorder,
-            borderRadius: BorderRadius.circular(16),
+        duration: reduceMotion ? Duration.zero : AppDesign.motionFast,
+        curve: AppDesign.motionCurve,
+        child: Container(
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            color: isSelected
+                ? AppDesign.gold.withValues(alpha: 0.08)
+                : Colors.white.withValues(alpha: 0.025),
+            borderRadius: BorderRadius.circular(AppDesign.radiusMedium),
+            border: Border.all(
+              color: isSelected
+                  ? AppDesign.gold.withValues(alpha: 0.36)
+                  : Colors.white.withValues(alpha: 0.07),
+            ),
           ),
-          child: Column(
-            children: <Widget>[
-              ListTile(
-                leading: CircleAvatar(
-                  child: Icon(
-                    playerIcons[player.iconIndex.clamp(
-                      0,
-                      playerIcons.length - 1,
-                    )],
+          child: Card(
+            clipBehavior: Clip.antiAlias,
+            color: isSelected ? AppDesign.panelRaised : null,
+            shape: RoundedRectangleBorder(
+              side: selectedBorder,
+              borderRadius: BorderRadius.circular(AppDesign.radiusMedium),
+            ),
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: isSelected
+                        ? AppDesign.gold.withValues(alpha: 0.18)
+                        : AppDesign.tealDeep,
+                    foregroundColor: isSelected
+                        ? AppDesign.goldSoft
+                        : AppDesign.text,
+                    child: Icon(
+                      playerIcons[player.iconIndex.clamp(
+                        0,
+                        playerIcons.length - 1,
+                      )],
+                    ),
                   ),
-                ),
-                title: InkWell(
-                  onTap: onEdit,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          player.name,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                  title: InkWell(
+                    onTap: onEdit,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            player.name,
+                            style: const TextStyle(fontWeight: FontWeight.w700),
+                          ),
                         ),
-                      ),
-                      if (isSelected)
-                        Container(
-                          margin: const EdgeInsets.only(left: 8),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(999),
-                          ),
-                          child: const Text(
-                            '1st',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 10,
+                        if (isSelected)
+                          Container(
+                            margin: const EdgeInsets.only(left: 8),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppDesign.gold.withValues(alpha: 0.16),
+                              borderRadius: BorderRadius.circular(999),
+                              border: Border.all(
+                                color: AppDesign.gold.withValues(alpha: 0.42),
+                              ),
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.workspace_premium_rounded,
+                                  size: 14,
+                                  color: AppDesign.goldSoft,
+                                ),
+                                SizedBox(width: 4),
+                                Text(
+                                  'PRIMO',
+                                  style: TextStyle(
+                                    color: AppDesign.goldSoft,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 10,
+                                    letterSpacing: 0.8,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
+                      ],
+                    ),
+                  ),
+                  subtitle: Text(
+                    isSelected ? 'Inizia il turno' : 'Giocatore',
+                    style: const TextStyle(color: AppDesign.textMuted),
+                  ),
+                  trailing: IconButton(
+                    onPressed: onRemove,
+                    icon: const Icon(Icons.close),
+                    tooltip: 'Elimina giocatore',
+                  ),
+                ),
+                const Divider(height: 1),
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Wrap(
+                    alignment: WrapAlignment.spaceEvenly,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    spacing: 20,
+                    runSpacing: 16,
+                    children: <Widget>[
+                      ControlColumn(
+                        label: 'Tempo',
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            IconButton(
+                              onPressed: onStopTimer,
+                              icon: const Icon(
+                                Icons.stop_rounded,
+                                color: AppDesign.danger,
+                              ),
+                              tooltip: 'Azzera timer',
+                            ),
+                            Text(formatDuration(player.elapsed)),
+                            IconButton(
+                              onPressed: onToggleTimer,
+                              icon: Icon(
+                                player.timerState == TimerState.running
+                                    ? Icons.pause
+                                    : Icons.play_arrow,
+                                color: player.timerState == TimerState.running
+                                    ? AppDesign.goldSoft
+                                    : AppDesign.teal,
+                              ),
+                              tooltip: player.timerState == TimerState.running
+                                  ? 'Pausa'
+                                  : 'Avvia',
+                            ),
+                          ],
                         ),
+                      ),
+                      ControlColumn(
+                        label: 'Turni',
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            IconButton(
+                              onPressed: player.turns > 0
+                                  ? () => onTurnChange(-1)
+                                  : null,
+                              icon: const Icon(Icons.remove),
+                            ),
+                            InkWell(
+                              onTap: onTurnsEdit,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                ),
+                                child: Text('${player.turns}'),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: player.turns < 99
+                                  ? () => onTurnChange(1)
+                                  : null,
+                              icon: const Icon(Icons.add),
+                            ),
+                          ],
+                        ),
+                      ),
+                      ControlColumn(
+                        label: 'Punteggio',
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            IconButton(
+                              onPressed: () => onScoreChange(-player.scoreStep),
+                              icon: const Icon(Icons.remove),
+                            ),
+                            InkWell(
+                              onTap: onScoreEdit,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                ),
+                                child: Text(formatNumber(player.score)),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () => onScoreChange(player.scoreStep),
+                              icon: const Icon(Icons.add),
+                            ),
+                            DropdownButton<double>(
+                              value: player.scoreStep,
+                              items: scoreSteps
+                                  .map(
+                                    (double value) => DropdownMenuItem<double>(
+                                      value: value,
+                                      child: Text(formatNumber(value)),
+                                    ),
+                                  )
+                                  .toList(),
+                              onChanged: onStepChange,
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                subtitle: const Text('Giocatore'),
-                trailing: IconButton(
-                  onPressed: onRemove,
-                  icon: const Icon(Icons.close),
-                  tooltip: 'Elimina giocatore',
-                ),
-              ),
-              const Divider(height: 1),
-              Padding(
-                padding: const EdgeInsets.all(12),
-                child: Wrap(
-                  alignment: WrapAlignment.spaceEvenly,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  spacing: 20,
-                  runSpacing: 16,
-                  children: <Widget>[
-                    ControlColumn(
-                      label: 'Tempo',
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          IconButton(
-                            onPressed: onStopTimer,
-                            icon: const Icon(
-                              Icons.stop_rounded,
-                              color: Colors.red,
-                            ),
-                            tooltip: 'Azzera timer',
-                          ),
-                          Text(formatDuration(player.elapsed)),
-                          IconButton(
-                            onPressed: onToggleTimer,
-                            icon: Icon(
-                              player.timerState == TimerState.running
-                                  ? Icons.pause
-                                  : Icons.play_arrow,
-                              color: player.timerState == TimerState.running
-                                  ? Colors.amber[800]
-                                  : Colors.green[700],
-                            ),
-                            tooltip: player.timerState == TimerState.running
-                                ? 'Pausa'
-                                : 'Avvia',
-                          ),
-                        ],
-                      ),
-                    ),
-                    ControlColumn(
-                      label: 'Turni',
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          IconButton(
-                            onPressed: player.turns > 0
-                                ? () => onTurnChange(-1)
-                                : null,
-                            icon: const Icon(Icons.remove),
-                          ),
-                          InkWell(
-                            onTap: onTurnsEdit,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                              ),
-                              child: Text('${player.turns}'),
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: player.turns < 99
-                                ? () => onTurnChange(1)
-                                : null,
-                            icon: const Icon(Icons.add),
-                          ),
-                        ],
-                      ),
-                    ),
-                    ControlColumn(
-                      label: 'Punteggio',
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          IconButton(
-                            onPressed: () => onScoreChange(-player.scoreStep),
-                            icon: const Icon(Icons.remove),
-                          ),
-                          InkWell(
-                            onTap: onScoreEdit,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                              ),
-                              child: Text(formatNumber(player.score)),
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () => onScoreChange(player.scoreStep),
-                            icon: const Icon(Icons.add),
-                          ),
-                          DropdownButton<double>(
-                            value: player.scoreStep,
-                            items: scoreSteps
-                                .map(
-                                  (double value) => DropdownMenuItem<double>(
-                                    value: value,
-                                    child: Text(formatNumber(value)),
-                                  ),
-                                )
-                                .toList(),
-                            onChanged: onStepChange,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -1900,7 +2139,14 @@ class ControlColumn extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Text(label, style: Theme.of(context).textTheme.labelLarge),
+        Text(
+          label,
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+            color: AppDesign.textMuted,
+            letterSpacing: 0.5,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
         child,
       ],
     );

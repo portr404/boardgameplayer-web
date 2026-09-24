@@ -3,6 +3,11 @@
 *.log
 *.pyc
 *.swp
+*.env
+*.env.*
+*.secret
+service-account*.json
+firebase-debug.log
 .DS_Store
 .atom/
 .build/
@@ -17,6 +22,8 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
+.vscode/
+.firebase/
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
