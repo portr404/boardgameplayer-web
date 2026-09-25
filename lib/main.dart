@@ -512,19 +512,31 @@ class CreditsFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
-    return Semantics(
-      link: true,
-      label: 'Contatta Francesco Fasolato per segnalazioni o recensioni',
-      child: TextButton(
-        onPressed: _openContactEmail,
-        style: TextButton.styleFrom(
-          foregroundColor: AppDesign.textMuted,
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          minimumSize: const Size(48, 32),
-          tapTargetSize: MaterialTapTargetSize.padded,
-          textStyle: const TextStyle(fontSize: 11, letterSpacing: 0.2),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.035),
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+      ),
+      child: Semantics(
+        link: true,
+        label: 'Contatta Francesco Fasolato per segnalazioni o recensioni',
+        child: TextButton(
+          onPressed: _openContactEmail,
+          style: TextButton.styleFrom(
+            foregroundColor: AppDesign.textMuted,
+            padding: EdgeInsets.zero,
+            minimumSize: const Size(52, 26),
+            tapTargetSize: MaterialTapTargetSize.padded,
+            textStyle: const TextStyle(
+              fontSize: 11,
+              letterSpacing: 0.2,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          child: Text(strings.text('contact')),
         ),
-        child: Text(strings.text('contact')),
       ),
     );
   }
@@ -1385,17 +1397,29 @@ class GameStore {
   Future<void> _lastSave = Future<void>.value();
   SharedPreferences? _cachedPreferences;
 
+  static String storageKeyForUser(String? userId) {
+    final String normalizedUserId = (userId ?? '').trim();
+    return normalizedUserId.isEmpty
+        ? '${key}_guest'
+        : '${key}_$normalizedUserId';
+  }
+
+  String _storageKeyForCurrentUser() => storageKeyForUser(_currentUser?.uid);
+
   Future<SharedPreferences> _getPreferences() async {
     return _cachedPreferences ??= await SharedPreferences.getInstance();
   }
 
   Future<List<Game>> load() async {
     final SharedPreferences preferences = await _getPreferences();
-    final String? raw = preferences.getString(key);
-    final List<Game> localGames = _decode(raw);
-
     final User? user = _currentUser;
-    if (user == null) return localGames;
+    final String storageKey = _storageKeyForCurrentUser();
+    final String? raw = preferences.getString(storageKey);
+    final List<Game> localGames = _decode(raw ?? preferences.getString(key));
+
+    if (user == null) {
+      return localGames;
+    }
 
     try {
       final DocumentSnapshot<Map<String, dynamic>> snapshot =
@@ -1407,9 +1431,10 @@ class GameStore {
       if (remoteGames is List<dynamic>) {
         final List<Game> games = _decodeList(remoteGames);
         await preferences.setString(
-          key,
+          storageKey,
           jsonEncode(games.map((Game game) => game.toJson()).toList()),
         );
+        await preferences.remove(key);
         return games;
       }
       if (localGames.isNotEmpty) {
@@ -1464,12 +1489,18 @@ class GameStore {
   Future<void> save(List<Game> games) async {
     _lastSave = _lastSave.then((_) async {
       final SharedPreferences preferences = await _getPreferences();
-      final bool saved = await preferences.setString(
-        key,
-        jsonEncode(games.map((Game game) => game.toJson()).toList()),
+      final String storageKey = _storageKeyForCurrentUser();
+      final String payload = jsonEncode(
+        games.map((Game game) => game.toJson()).toList(),
       );
+      final bool saved = await preferences.setString(storageKey, payload);
       if (!saved) throw StateError('Salvataggio locale non riuscito.');
       final User? user = _currentUser;
+      if (user == null) {
+        await preferences.setString(key, payload);
+      } else {
+        await preferences.remove(key);
+      }
       if (user != null) {
         try {
           await _saveToCloud(user, games);
@@ -1663,6 +1694,7 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
     return Scaffold(
+      backgroundColor: AppDesign.canvas,
       appBar: AppBar(
         title: const Text('BoardGamePlayer'),
         actions: <Widget>[
@@ -1691,8 +1723,8 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
               ],
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      body: SafeArea(
-        child: BoardBackdrop(
+      body: BoardBackdrop(
+        child: SafeArea(
           child: loading
               ? const Center(child: CircularProgressIndicator())
               : Stack(
@@ -1834,9 +1866,9 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                         ),
                       ),
                     ),
-                    const Positioned(
-                      left: 16,
-                      bottom: 2,
+                    Positioned(
+                      right: 100,
+                      bottom: 30,
                       child: CreditsFooter(),
                     ),
                   ],
@@ -2222,6 +2254,7 @@ class _GameDetailPageState extends State<GameDetailPage>
           );
 
     return Scaffold(
+      backgroundColor: AppDesign.canvas,
       appBar: AppBar(
         leading: BackButton(
           onPressed: () async {
@@ -2232,8 +2265,8 @@ class _GameDetailPageState extends State<GameDetailPage>
         title: Text(game.name),
         actions: const <Widget>[LanguagePicker()],
       ),
-      body: SafeArea(
-        child: BoardBackdrop(
+      body: BoardBackdrop(
+        child: SafeArea(
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1000),

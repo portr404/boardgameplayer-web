@@ -67,6 +67,12 @@ void main() {
     expect(loaded.single.players.single.score, -2.5);
   });
 
+  test('GameStore usa una chiave locale specifica per ogni utente', () {
+    expect(GameStore.storageKeyForUser('user-a'), 'board_game_player_games_user-a');
+    expect(GameStore.storageKeyForUser('user-b'), 'board_game_player_games_user-b');
+    expect(GameStore.storageKeyForUser(null), 'board_game_player_games_guest');
+  });
+
   test(
     'Game serializes selectedFirstPlayerId with backwards compatibility',
     () {
