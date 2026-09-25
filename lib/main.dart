@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -74,23 +75,443 @@ class BoardBackdrop extends StatelessWidget {
   }
 }
 
+const List<Locale> supportedLocales = <Locale>[
+  Locale('it'),
+  Locale('en'),
+  Locale('fr'),
+  Locale('de'),
+  Locale('es'),
+  Locale('pt'),
+  Locale('ru'),
+  Locale('zh'),
+  Locale('ja'),
+];
+
+const Map<String, String> languageFlags = <String, String>{
+  'it': '🇮🇹',
+  'en': '🇬🇧',
+  'fr': '🇫🇷',
+  'de': '🇩🇪',
+  'es': '🇪🇸',
+  'pt': '🇵🇹',
+  'ru': '🇷🇺',
+  'zh': '🇨🇳',
+  'ja': '🇯🇵',
+};
+
+final ValueNotifier<Locale> appLocale = ValueNotifier<Locale>(
+  supportedLocales.first,
+);
+
+class AppStrings {
+  const AppStrings(this.locale);
+
+  final Locale locale;
+
+  static AppStrings of(BuildContext context) =>
+      Localizations.of<AppStrings>(context, AppStrings) ??
+      AppStrings(appLocale.value);
+
+  String get _language => locale.languageCode;
+
+  static const Map<String, Map<String, String>>
+  _values = <String, Map<String, String>>{
+    'it': <String, String>{
+      'loginWelcome': 'Bentornato al tavolo',
+      'registerWelcome': 'Apri il tuo tavolo',
+      'loginDescription':
+          'Accedi per ritrovare le tue partite su ogni dispositivo.',
+      'email': 'Email',
+      'password': 'Password',
+      'login': 'Accedi',
+      'register': 'Crea account',
+      'newAccount': 'Crea un nuovo account',
+      'existingAccount': 'Ho già un account',
+      'google': 'Continua con Google',
+      'logout': 'Esci dall’account',
+      'newGame': 'Crea una partita',
+      'ready': 'Il tavolo è pronto',
+      'readyDescription': 'Crea la prima partita per iniziare la serata.',
+      'noPlayers': 'Nessun giocatore presente',
+      'dice': 'Lancia dadi',
+      'firstPlayer': 'Estrai primo giocatore',
+      'addPlayer': 'Aggiungi giocatore',
+      'delete': 'Elimina',
+      'cancel': 'Annulla',
+      'save': 'Salva',
+      'close': 'Chiudi',
+      'roll': 'Lancia',
+      'games': 'partite',
+      'players': 'giocatori',
+      'updated': 'Aggiornata il',
+      'contact': 'Creato da Francesco Fasolato',
+      'language': 'Lingua',
+      'authError': 'Accesso non riuscito. Riprova.',
+      'popupClosed':
+          'La finestra Google è stata chiusa. Riprova o consenti i popup.',
+      'unauthorizedDomain':
+          'Questo dominio non è autorizzato in Firebase Authentication.',
+      'popupBlocked': 'Il popup è stato bloccato. Riprova per usare il reindirizzamento Google.',
+    },
+    'en': <String, String>{
+      'loginWelcome': 'Welcome back to the table',
+      'registerWelcome': 'Open your table',
+      'loginDescription': 'Sign in to find your games on every device.',
+      'email': 'Email',
+      'password': 'Password',
+      'login': 'Sign in',
+      'register': 'Create account',
+      'newAccount': 'Create a new account',
+      'existingAccount': 'I already have an account',
+      'google': 'Continue with Google',
+      'logout': 'Sign out',
+      'newGame': 'Create a game',
+      'ready': 'The table is ready',
+      'readyDescription': 'Create your first game to start the evening.',
+      'noPlayers': 'No players yet',
+      'dice': 'Roll dice',
+      'firstPlayer': 'Draw first player',
+      'addPlayer': 'Add player',
+      'delete': 'Delete',
+      'cancel': 'Cancel',
+      'save': 'Save',
+      'close': 'Close',
+      'roll': 'Roll',
+      'games': 'games',
+      'players': 'players',
+      'updated': 'Updated on',
+      'contact': 'Created by Francesco Fasolato',
+      'language': 'Language',
+      'authError': 'Sign-in failed. Try again.',
+      'popupClosed': 'The Google window was closed. Try again or allow popups.',
+      'unauthorizedDomain':
+          'This domain is not authorized in Firebase Authentication.',
+      'popupBlocked':
+          'The popup was blocked. Try again to use Google redirect.',
+    },
+    'fr': <String, String>{
+      'loginWelcome': 'Bon retour à la table',
+      'registerWelcome': 'Ouvrez votre table',
+      'loginDescription':
+          'Connectez-vous pour retrouver vos parties sur chaque appareil.',
+      'email': 'E-mail',
+      'password': 'Mot de passe',
+      'login': 'Se connecter',
+      'register': 'Créer un compte',
+      'newAccount': 'Créer un nouveau compte',
+      'existingAccount': 'J’ai déjà un compte',
+      'google': 'Continuer avec Google',
+      'logout': 'Se déconnecter',
+      'newGame': 'Créer une partie',
+      'ready': 'La table est prête',
+      'readyDescription': 'Créez votre première partie pour commencer.',
+      'noPlayers': 'Aucun joueur',
+      'dice': 'Lancer les dés',
+      'firstPlayer': 'Tirer le premier joueur',
+      'addPlayer': 'Ajouter un joueur',
+      'delete': 'Supprimer',
+      'cancel': 'Annuler',
+      'save': 'Enregistrer',
+      'close': 'Fermer',
+      'roll': 'Lancer',
+      'games': 'parties',
+      'players': 'joueurs',
+      'updated': 'Mise à jour le',
+      'contact': 'Créé par Francesco Fasolato',
+      'language': 'Langue',
+      'authError': 'Échec de la connexion. Réessayez.',
+      'popupClosed': 'La fenêtre Google a été fermée. Réessayez ou autorisez les fenêtres popup.',
+      'unauthorizedDomain':
+          'Ce domaine n’est pas autorisé dans Firebase Authentication.',
+      'popupBlocked': 'La fenêtre popup a été bloquée. Réessayez avec la redirection Google.',
+    },
+    'de': <String, String>{
+      'loginWelcome': 'Willkommen zurück am Tisch',
+      'registerWelcome': 'Eröffne deinen Tisch',
+      'loginDescription':
+          'Melde dich an, um deine Spiele auf jedem Gerät zu finden.',
+      'email': 'E-Mail',
+      'password': 'Passwort',
+      'login': 'Anmelden',
+      'register': 'Konto erstellen',
+      'newAccount': 'Neues Konto erstellen',
+      'existingAccount': 'Ich habe bereits ein Konto',
+      'google': 'Mit Google fortfahren',
+      'logout': 'Abmelden',
+      'newGame': 'Spiel erstellen',
+      'ready': 'Der Tisch ist bereit',
+      'readyDescription': 'Erstelle dein erstes Spiel und starte den Abend.',
+      'noPlayers': 'Noch keine Spieler',
+      'dice': 'Würfel werfen',
+      'firstPlayer': 'Ersten Spieler ziehen',
+      'addPlayer': 'Spieler hinzufügen',
+      'delete': 'Löschen',
+      'cancel': 'Abbrechen',
+      'save': 'Speichern',
+      'close': 'Schließen',
+      'roll': 'Werfen',
+      'games': 'Spiele',
+      'players': 'Spieler',
+      'updated': 'Aktualisiert am',
+      'contact': 'Erstellt von Francesco Fasolato',
+      'language': 'Sprache',
+      'authError': 'Anmeldung fehlgeschlagen. Bitte erneut versuchen.',
+      'popupClosed': 'Das Google-Fenster wurde geschlossen. Erlaube Popups und versuche es erneut.',
+      'unauthorizedDomain':
+          'Diese Domain ist in Firebase Authentication nicht autorisiert.',
+      'popupBlocked': 'Das Popup wurde blockiert. Versuche es mit der Google-Weiterleitung.',
+    },
+    'es': <String, String>{
+      'loginWelcome': 'Bienvenido de nuevo a la mesa',
+      'registerWelcome': 'Abre tu mesa',
+      'loginDescription':
+          'Inicia sesión para encontrar tus partidas en cualquier dispositivo.',
+      'email': 'Correo electrónico',
+      'password': 'Contraseña',
+      'login': 'Iniciar sesión',
+      'register': 'Crear cuenta',
+      'newAccount': 'Crear una cuenta nueva',
+      'existingAccount': 'Ya tengo una cuenta',
+      'google': 'Continuar con Google',
+      'logout': 'Cerrar sesión',
+      'newGame': 'Crear partida',
+      'ready': 'La mesa está lista',
+      'readyDescription': 'Crea tu primera partida para empezar.',
+      'noPlayers': 'Aún no hay jugadores',
+      'dice': 'Lanzar dados',
+      'firstPlayer': 'Elegir primer jugador',
+      'addPlayer': 'Añadir jugador',
+      'delete': 'Eliminar',
+      'cancel': 'Cancelar',
+      'save': 'Guardar',
+      'close': 'Cerrar',
+      'roll': 'Lanzar',
+      'games': 'partidas',
+      'players': 'jugadores',
+      'updated': 'Actualizada el',
+      'contact': 'Creado por Francesco Fasolato',
+      'language': 'Idioma',
+      'authError': 'No se pudo iniciar sesión. Inténtalo de nuevo.',
+      'popupClosed': 'La ventana de Google se cerró. Permite las ventanas emergentes y vuelve a intentarlo.',
+      'unauthorizedDomain':
+          'Este dominio no está autorizado en Firebase Authentication.',
+      'popupBlocked': 'La ventana emergente fue bloqueada. Prueba con la redirección de Google.',
+    },
+    'pt': <String, String>{
+      'loginWelcome': 'Bem-vindo de volta à mesa',
+      'registerWelcome': 'Abra a sua mesa',
+      'loginDescription':
+          'Entre para encontrar os seus jogos em qualquer dispositivo.',
+      'email': 'E-mail',
+      'password': 'Palavra-passe',
+      'login': 'Entrar',
+      'register': 'Criar conta',
+      'newAccount': 'Criar uma nova conta',
+      'existingAccount': 'Já tenho uma conta',
+      'google': 'Continuar com Google',
+      'logout': 'Sair',
+      'newGame': 'Criar jogo',
+      'ready': 'A mesa está pronta',
+      'readyDescription': 'Crie o seu primeiro jogo para começar.',
+      'noPlayers': 'Ainda não há jogadores',
+      'dice': 'Lançar dados',
+      'firstPlayer': 'Sortear primeiro jogador',
+      'addPlayer': 'Adicionar jogador',
+      'delete': 'Eliminar',
+      'cancel': 'Cancelar',
+      'save': 'Guardar',
+      'close': 'Fechar',
+      'roll': 'Lançar',
+      'games': 'jogos',
+      'players': 'jogadores',
+      'updated': 'Atualizado em',
+      'contact': 'Criado por Francesco Fasolato',
+      'language': 'Idioma',
+      'authError': 'Não foi possível entrar. Tente novamente.',
+      'popupClosed':
+          'A janela do Google foi fechada. Permita popups e tente novamente.',
+      'unauthorizedDomain':
+          'Este domínio não está autorizado no Firebase Authentication.',
+      'popupBlocked':
+          'O popup foi bloqueado. Tente o redirecionamento do Google.',
+    },
+    'ru': <String, String>{
+      'loginWelcome': 'С возвращением за стол',
+      'registerWelcome': 'Откройте свой стол',
+      'loginDescription': 'Войдите, чтобы найти свои игры на любом устройстве.',
+      'email': 'Электронная почта',
+      'password': 'Пароль',
+      'login': 'Войти',
+      'register': 'Создать аккаунт',
+      'newAccount': 'Создать новый аккаунт',
+      'existingAccount': 'У меня уже есть аккаунт',
+      'google': 'Продолжить с Google',
+      'logout': 'Выйти',
+      'newGame': 'Создать игру',
+      'ready': 'Стол готов',
+      'readyDescription': 'Создайте первую игру, чтобы начать.',
+      'noPlayers': 'Игроков пока нет',
+      'dice': 'Бросить кубики',
+      'firstPlayer': 'Выбрать первого игрока',
+      'addPlayer': 'Добавить игрока',
+      'delete': 'Удалить',
+      'cancel': 'Отмена',
+      'save': 'Сохранить',
+      'close': 'Закрыть',
+      'roll': 'Бросить',
+      'games': 'игр',
+      'players': 'игроков',
+      'updated': 'Обновлено',
+      'contact': 'Создано Франческо Фасолато',
+      'language': 'Язык',
+      'authError': 'Не удалось войти. Повторите попытку.',
+      'popupClosed': 'Окно Google закрыто. Разрешите всплывающие окна и повторите попытку.',
+      'unauthorizedDomain': 'Этот домен не разрешён в Firebase Authentication.',
+      'popupBlocked':
+          'Всплывающее окно заблокировано. Попробуйте перенаправление Google.',
+    },
+    'zh': <String, String>{
+      'loginWelcome': '欢迎回到牌桌',
+      'registerWelcome': '开启你的牌桌',
+      'loginDescription': '登录后即可在所有设备上找到你的游戏。',
+      'email': '电子邮箱',
+      'password': '密码',
+      'login': '登录',
+      'register': '创建账户',
+      'newAccount': '创建新账户',
+      'existingAccount': '我已有账户',
+      'google': '使用 Google 继续',
+      'logout': '退出登录',
+      'newGame': '创建游戏',
+      'ready': '牌桌已准备好',
+      'readyDescription': '创建第一场游戏，开始今晚的对局。',
+      'noPlayers': '暂无玩家',
+      'dice': '掷骰子',
+      'firstPlayer': '抽取首位玩家',
+      'addPlayer': '添加玩家',
+      'delete': '删除',
+      'cancel': '取消',
+      'save': '保存',
+      'close': '关闭',
+      'roll': '掷骰',
+      'games': '场游戏',
+      'players': '位玩家',
+      'updated': '更新于',
+      'contact': '由 Francesco Fasolato 创建',
+      'language': '语言',
+      'authError': '登录失败，请重试。',
+      'popupClosed': 'Google 窗口已关闭。请允许弹出窗口后重试。',
+      'unauthorizedDomain': '此域名未获 Firebase Authentication 授权。',
+      'popupBlocked': '弹出窗口被拦截。请尝试 Google 重定向。',
+    },
+    'ja': <String, String>{
+      'loginWelcome': 'テーブルへおかえりなさい',
+      'registerWelcome': 'あなたのテーブルを開く',
+      'loginDescription': 'ログインすると、どの端末からでもゲームを利用できます。',
+      'email': 'メールアドレス',
+      'password': 'パスワード',
+      'login': 'ログイン',
+      'register': 'アカウント作成',
+      'newAccount': '新しいアカウントを作成',
+      'existingAccount': 'アカウントをお持ちですか',
+      'google': 'Google で続行',
+      'logout': 'ログアウト',
+      'newGame': 'ゲームを作成',
+      'ready': 'テーブルの準備完了',
+      'readyDescription': '最初のゲームを作って夜を始めましょう。',
+      'noPlayers': 'プレイヤーはいません',
+      'dice': 'サイコロを振る',
+      'firstPlayer': '最初のプレイヤーを選ぶ',
+      'addPlayer': 'プレイヤーを追加',
+      'delete': '削除',
+      'cancel': 'キャンセル',
+      'save': '保存',
+      'close': '閉じる',
+      'roll': '振る',
+      'games': 'ゲーム',
+      'players': 'プレイヤー',
+      'updated': '更新日',
+      'contact': 'Francesco Fasolato 作',
+      'language': '言語',
+      'authError': 'ログインできませんでした。もう一度お試しください。',
+      'popupClosed': 'Google ウィンドウが閉じられました。ポップアップを許可して再試行してください。',
+      'unauthorizedDomain': 'このドメインは Firebase Authentication で許可されていません。',
+      'popupBlocked': 'ポップアップがブロックされました。Google リダイレクトをお試しください。',
+    },
+  };
+
+  String text(String key) => _values[_language]?[key] ?? _values['en']![key]!;
+}
+
+class AppLocalizationsDelegate extends LocalizationsDelegate<AppStrings> {
+  const AppLocalizationsDelegate();
+
+  @override
+  bool isSupported(Locale locale) => supportedLocales.any(
+    (Locale item) => item.languageCode == locale.languageCode,
+  );
+
+  @override
+  Future<AppStrings> load(Locale locale) async => AppStrings(locale);
+
+  @override
+  bool shouldReload(AppLocalizationsDelegate old) => false;
+}
+
+class LanguagePicker extends StatelessWidget {
+  const LanguagePicker({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<Locale>(
+      valueListenable: appLocale,
+      builder: (_, Locale locale, _) => PopupMenuButton<Locale>(
+        tooltip: AppStrings.of(context).text('language'),
+        onSelected: (Locale value) => appLocale.value = value,
+        constraints: const BoxConstraints(minWidth: 72, maxWidth: 72),
+        padding: EdgeInsets.zero,
+        icon: Text(
+          languageFlags[locale.languageCode] ?? '🌐',
+          style: const TextStyle(fontSize: 24),
+        ),
+        itemBuilder: (_) => supportedLocales
+            .map(
+              (Locale value) => PopupMenuItem<Locale>(
+                value: value,
+                height: 58,
+                child: Center(
+                  child: Text(
+                    languageFlags[value.languageCode] ?? '🌐',
+                    style: const TextStyle(fontSize: 30),
+                  ),
+                ),
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+}
+
 class CreditsFooter extends StatelessWidget {
   const CreditsFooter({super.key});
 
   Future<void> _openContactEmail() async {
+    final String subject = Uri.encodeComponent(
+      'BoardGamePlayer - segnalazione o recensione',
+    );
+    final String body = Uri.encodeComponent('Ciao Francesco,\n\n');
     final Uri email = Uri(
       scheme: 'mailto',
       path: 'portr404@gmail.com',
-      queryParameters: <String, String>{
-        'subject': 'BoardGamePlayer - segnalazione o recensione',
-        'body': 'Ciao Francesco,\n\n',
-      },
+      query: 'subject=$subject&body=$body',
     );
     await launchUrl(email);
   }
 
   @override
   Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
     return Semantics(
       link: true,
       label: 'Contatta Francesco Fasolato per segnalazioni o recensioni',
@@ -103,7 +524,7 @@ class CreditsFooter extends StatelessWidget {
           tapTargetSize: MaterialTapTargetSize.padded,
           textStyle: const TextStyle(fontSize: 11, letterSpacing: 0.2),
         ),
-        child: const Text('Creato da Francesco Fasolato'),
+        child: Text(strings.text('contact')),
       ),
     );
   }
@@ -232,11 +653,22 @@ class MyApp extends StatelessWidget {
       visualDensity: VisualDensity.standard,
     );
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'BoardGamePlayer',
-      theme: darkTheme,
-      home: const AuthGate(),
+    return ValueListenableBuilder<Locale>(
+      valueListenable: appLocale,
+      builder: (_, Locale locale, _) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'BoardGamePlayer',
+        theme: darkTheme,
+        locale: locale,
+        supportedLocales: supportedLocales,
+        localizationsDelegates: const <LocalizationsDelegate<Object>>[
+          AppLocalizationsDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        home: const AuthGate(),
+      ),
     );
   }
 }
@@ -321,7 +753,16 @@ class _AuthPageState extends State<AuthPage> {
       final FirebaseAuth auth = FirebaseAuth.instance;
       final GoogleAuthProvider provider = GoogleAuthProvider();
       if (kIsWeb) {
-        await auth.signInWithPopup(provider);
+        try {
+          await auth.signInWithPopup(provider);
+        } on FirebaseAuthException catch (exception) {
+          if (exception.code == 'popup-blocked' ||
+              exception.code == 'popup-closed-by-user') {
+            await auth.signInWithRedirect(provider);
+            return;
+          }
+          rethrow;
+        }
       } else {
         await auth.signInWithProvider(provider);
       }
@@ -333,28 +774,35 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   String _authMessage(String code) {
+    final AppStrings strings = AppStrings.of(context);
     switch (code) {
       case 'email-already-in-use':
-        return 'Questa email è già registrata.';
+        return strings.text('authError');
       case 'invalid-credential':
       case 'wrong-password':
       case 'user-not-found':
-        return 'Email o password non corrette.';
+        return strings.text('authError');
       case 'weak-password':
-        return 'La password deve contenere almeno 6 caratteri.';
+        return strings.text('authError');
       case 'popup-closed-by-user':
-        return 'Accesso Google annullato.';
+        return strings.text('popupClosed');
+      case 'popup-blocked':
+        return strings.text('popupBlocked');
+      case 'unauthorized-domain':
+        return strings.text('unauthorizedDomain');
       default:
-        return 'Accesso non riuscito. Riprova.';
+        return strings.text('authError');
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
     return Scaffold(
       body: BoardBackdrop(
         child: Stack(
           children: <Widget>[
+            const Positioned(top: 12, right: 12, child: LanguagePicker()),
             Center(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(24, 24, 24, 56),
@@ -409,15 +857,15 @@ class _AuthPageState extends State<AuthPage> {
                               const SizedBox(height: 8),
                               Text(
                                 _isRegistering
-                                    ? 'Apri il tuo tavolo'
-                                    : 'Bentornato al tavolo',
+                                    ? strings.text('registerWelcome')
+                                    : strings.text('loginWelcome'),
                                 style: Theme.of(context).textTheme.headlineSmall
                                     ?.copyWith(fontWeight: FontWeight.w700),
                                 textAlign: TextAlign.center,
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                'Accedi per ritrovare le tue partite su ogni dispositivo.',
+                                strings.text('loginDescription'),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context).textTheme.bodyMedium
                                     ?.copyWith(color: AppDesign.textMuted),
@@ -426,9 +874,9 @@ class _AuthPageState extends State<AuthPage> {
                               TextFormField(
                                 controller: _emailController,
                                 keyboardType: TextInputType.emailAddress,
-                                decoration: const InputDecoration(
-                                  labelText: 'Email',
-                                  prefixIcon: Icon(Icons.alternate_email),
+                                decoration: InputDecoration(
+                                  labelText: strings.text('email'),
+                                  prefixIcon: const Icon(Icons.alternate_email),
                                 ),
                                 validator: (String? value) =>
                                     value == null || !value.contains('@')
@@ -439,9 +887,9 @@ class _AuthPageState extends State<AuthPage> {
                               TextFormField(
                                 controller: _passwordController,
                                 obscureText: true,
-                                decoration: const InputDecoration(
-                                  labelText: 'Password',
-                                  prefixIcon: Icon(Icons.lock_outline),
+                                decoration: InputDecoration(
+                                  labelText: strings.text('password'),
+                                  prefixIcon: const Icon(Icons.lock_outline),
                                 ),
                                 validator: (String? value) =>
                                     value == null || value.length < 6
@@ -469,7 +917,9 @@ class _AuthPageState extends State<AuthPage> {
                                         : Icons.login,
                                   ),
                                   label: Text(
-                                    _isRegistering ? 'Crea account' : 'Accedi',
+                                    _isRegistering
+                                        ? strings.text('register')
+                                        : strings.text('login'),
                                   ),
                                 ),
                               ),
@@ -482,8 +932,8 @@ class _AuthPageState extends State<AuthPage> {
                                       }),
                                 child: Text(
                                   _isRegistering
-                                      ? 'Ho già un account'
-                                      : 'Crea un nuovo account',
+                                      ? strings.text('existingAccount')
+                                      : strings.text('newAccount'),
                                 ),
                               ),
                               const Divider(height: 24),
@@ -495,7 +945,7 @@ class _AuthPageState extends State<AuthPage> {
                                     Icons.g_mobiledata,
                                     size: 28,
                                   ),
-                                  label: const Text('Continua con Google'),
+                                  label: Text(strings.text('google')),
                                 ),
                               ),
                             ],
@@ -637,6 +1087,7 @@ class _DiceRollSheetState extends State<DiceRollSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
     final List<Widget> dieOptions = DieType.values
         .map(
           (DieType dieType) => ChoiceChip(
@@ -757,7 +1208,9 @@ class _DiceRollSheetState extends State<DiceRollSheet> {
                 ),
                 const SizedBox(height: 18),
                 Text(
-                  'Dadi',
+                  strings.locale.languageCode == 'it'
+                      ? 'Dadi'
+                      : strings.text('dice'),
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -790,7 +1243,7 @@ class _DiceRollSheetState extends State<DiceRollSheet> {
                       foregroundColor: AppDesign.ink,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
-                    child: const Text('Lancia'),
+                    child: Text(strings.text('roll')),
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -802,7 +1255,7 @@ class _DiceRollSheetState extends State<DiceRollSheet> {
                       foregroundColor: Colors.white70,
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
-                    child: const Text('Chiudi'),
+                    child: Text(strings.text('close')),
                   ),
                 ),
               ],
@@ -1208,13 +1661,15 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('BoardGamePlayer'),
         actions: <Widget>[
+          const LanguagePicker(),
           IconButton(
             onPressed: () => FirebaseAuth.instance.signOut(),
-            tooltip: 'Esci dall’account',
+            tooltip: strings.text('logout'),
             icon: const Icon(Icons.logout),
           ),
         ],
@@ -1228,7 +1683,7 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                 FloatingActionButton(
                   heroTag: 'create-game',
                   onPressed: addGame,
-                  tooltip: 'Crea una partita',
+                  tooltip: strings.text('newGame'),
                   backgroundColor: AppDesign.gold,
                   foregroundColor: AppDesign.ink,
                   child: const Icon(Icons.add),
@@ -1272,7 +1727,7 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                                     ),
                                     const SizedBox(height: 18),
                                     Text(
-                                      'Il tavolo è pronto',
+                                      strings.text('ready'),
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleLarge
@@ -1282,7 +1737,7 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                                     ),
                                     const SizedBox(height: 6),
                                     Text(
-                                      'Crea la prima partita per iniziare la serata.',
+                                      strings.text('readyDescription'),
                                       textAlign: TextAlign.center,
                                       style: Theme.of(context)
                                           .textTheme
@@ -1308,7 +1763,8 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                                   final Game game = games[index];
                                   return Semantics(
                                     button: true,
-                                    label: 'Apri partita ${game.name}',
+                                    label:
+                                        '${strings.text('newGame')}: ${game.name}',
                                     child: Container(
                                       key: ValueKey<String>(game.id),
                                       padding: const EdgeInsets.all(4),
@@ -1347,7 +1803,7 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                                             ),
                                           ),
                                           subtitle: Text(
-                                            '${game.players.length} giocatori • Aggiornata il ${dateLabel(game.updatedAt)}',
+                                            '${game.players.length} ${strings.text('players')} • ${strings.text('updated')} ${dateLabel(game.updatedAt)}',
                                             style: const TextStyle(
                                               color: AppDesign.textMuted,
                                             ),
@@ -1357,7 +1813,7 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                                             icon: const Icon(
                                               Icons.delete_outline,
                                             ),
-                                            tooltip: 'Elimina partita',
+                                            tooltip: strings.text('delete'),
                                           ),
                                         ),
                                       ),
@@ -1374,14 +1830,14 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                       child: Center(
                         child: DiceLauncherButton(
                           onPressed: () => showDiceSheet(context),
+                          label: strings.text('dice'),
                         ),
                       ),
                     ),
                     const Positioned(
                       left: 16,
-                      right: 16,
                       bottom: 2,
-                      child: Center(child: CreditsFooter()),
+                      child: CreditsFooter(),
                     ),
                   ],
                 ),
@@ -1710,6 +2166,7 @@ class _GameDetailPageState extends State<GameDetailPage>
 
   @override
   Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
     final bool isPortraitMobile =
         MediaQuery.sizeOf(context).width < 700 &&
         MediaQuery.orientationOf(context) == Orientation.portrait;
@@ -1718,7 +2175,7 @@ class _GameDetailPageState extends State<GameDetailPage>
         ? FloatingActionButton(
             heroTag: 'first-player',
             onPressed: game.players.isEmpty ? null : selectFirstPlayer,
-            tooltip: 'Estrai primo giocatore',
+            tooltip: strings.text('firstPlayer'),
             backgroundColor: game.players.isEmpty
                 ? AppDesign.panelRaised
                 : AppDesign.gold,
@@ -1731,7 +2188,7 @@ class _GameDetailPageState extends State<GameDetailPage>
         : FloatingActionButton.extended(
             heroTag: 'first-player',
             onPressed: game.players.isEmpty ? null : selectFirstPlayer,
-            tooltip: 'Estrai primo giocatore',
+            tooltip: strings.text('firstPlayer'),
             backgroundColor: game.players.isEmpty
                 ? AppDesign.panelRaised
                 : AppDesign.gold,
@@ -1740,14 +2197,14 @@ class _GameDetailPageState extends State<GameDetailPage>
                 : AppDesign.ink,
             elevation: 12,
             icon: const Icon(Icons.workspace_premium_rounded),
-            label: const Text('Estrai primo giocatore'),
+            label: Text(strings.text('firstPlayer')),
           );
 
     final Widget diceButton = isPortraitMobile
         ? FloatingActionButton(
             heroTag: 'dice-launcher',
             onPressed: () => showDiceSheet(context),
-            tooltip: 'Lancia dadi',
+            tooltip: strings.text('dice'),
             backgroundColor: AppDesign.teal,
             foregroundColor: AppDesign.ink,
             elevation: 12,
@@ -1756,12 +2213,12 @@ class _GameDetailPageState extends State<GameDetailPage>
         : FloatingActionButton.extended(
             heroTag: 'dice-launcher',
             onPressed: () => showDiceSheet(context),
-            tooltip: 'Lancia dadi',
+            tooltip: strings.text('dice'),
             backgroundColor: AppDesign.teal,
             foregroundColor: AppDesign.ink,
             elevation: 12,
             icon: const Icon(Icons.casino),
-            label: const Text('Lancia dadi'),
+            label: Text(strings.text('dice')),
           );
 
     return Scaffold(
@@ -1773,6 +2230,7 @@ class _GameDetailPageState extends State<GameDetailPage>
           },
         ),
         title: Text(game.name),
+        actions: const <Widget>[LanguagePicker()],
       ),
       body: SafeArea(
         child: BoardBackdrop(
