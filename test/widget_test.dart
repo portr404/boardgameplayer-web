@@ -73,6 +73,32 @@ void main() {
     expect(GameStore.storageKeyForUser(null), 'board_game_player_games_guest');
   });
 
+  test('AppStrings returns clear auth error messages for Firebase codes', () {
+    final AppStrings italian = AppStrings(const Locale('it'));
+    expect(
+      italian.authErrorForCode('email-already-in-use'),
+      contains('già registrata'),
+    );
+    expect(
+      italian.authErrorForCode('user-not-found'),
+      contains('Nessun account trovato'),
+    );
+    expect(
+      italian.authErrorForCode('wrong-password'),
+      contains('Password non corretta'),
+    );
+
+    final AppStrings english = AppStrings(const Locale('en'));
+    expect(
+      english.authErrorForCode('email-already-in-use'),
+      contains('already registered'),
+    );
+    expect(
+      english.authErrorForCode('user-not-found'),
+      contains('No account was found'),
+    );
+  });
+
   test(
     'Game serializes selectedFirstPlayerId with backwards compatibility',
     () {

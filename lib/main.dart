@@ -147,6 +147,19 @@ class AppStrings {
       'contact': 'Creato da Francesco Fasolato',
       'language': 'Lingua',
       'authError': 'Accesso non riuscito. Riprova.',
+      'authEmailExists': 'Questa email è già registrata. Prova ad accedere oppure usa un’altra email.',
+      'authInvalidEmail':
+          'L’email non è valida. Controlla il formato e riprova.',
+      'authUserNotFound': 'Nessun account trovato con questa email. Controlla l’indirizzo o crea un account.',
+      'authWrongPassword':
+          'Password non corretta. Controlla la password e riprova.',
+      'authInvalidCredential':
+          'Credenziali non valide. Controlla email e password e riprova.',
+      'authWeakPassword':
+          'La password è troppo debole. Scegli almeno 6 caratteri e riprova.',
+      'authTooManyRequests': 'Troppi tentativi. Riprova tra qualche istante.',
+      'authNetworkError':
+          'Connessione assente o instabile. Controlla la rete e riprova.',
       'popupClosed':
           'La finestra Google è stata chiusa. Riprova o consenti i popup.',
       'unauthorizedDomain':
@@ -183,6 +196,17 @@ class AppStrings {
       'contact': 'Created by Francesco Fasolato',
       'language': 'Language',
       'authError': 'Sign-in failed. Try again.',
+      'authEmailExists': 'This email is already registered. Try signing in or use a different email.',
+      'authInvalidEmail':
+          'This email is not valid. Check the format and try again.',
+      'authUserNotFound': 'No account was found for this email. Check the address or create an account.',
+      'authWrongPassword':
+          'Incorrect password. Check your password and try again.',
+      'authInvalidCredential': 'The credentials are invalid. Check your email and password and try again.',
+      'authWeakPassword': 'The password is too weak. Choose at least 6 characters and try again.',
+      'authTooManyRequests':
+          'Too many attempts. Please try again in a few moments.',
+      'authNetworkError': 'The connection is unavailable or unstable. Check your network and try again.',
       'popupClosed': 'The Google window was closed. Try again or allow popups.',
       'unauthorizedDomain':
           'This domain is not authorized in Firebase Authentication.',
@@ -220,6 +244,17 @@ class AppStrings {
       'contact': 'Créé par Francesco Fasolato',
       'language': 'Langue',
       'authError': 'Échec de la connexion. Réessayez.',
+      'authEmailExists': 'Cette adresse e-mail est déjà enregistrée. Essayez de vous connecter ou utilisez une autre adresse.',
+      'authInvalidEmail':
+          'Cette adresse e-mail est invalide. Vérifiez le format et réessayez.',
+      'authUserNotFound': 'Aucun compte trouvé pour cette adresse. Vérifiez l’adresse ou créez un compte.',
+      'authWrongPassword':
+          'Mot de passe incorrect. Vérifiez votre mot de passe et réessayez.',
+      'authInvalidCredential': 'Les identifiants sont invalides. Vérifiez votre e-mail et votre mot de passe.',
+      'authWeakPassword': 'Le mot de passe est trop faible. Choisissez au moins 6 caractères et réessayez.',
+      'authTooManyRequests':
+          'Trop de tentatives. Réessayez dans quelques instants.',
+      'authNetworkError': 'La connexion est indisponible ou instable. Vérifiez votre réseau et réessayez.',
       'popupClosed': 'La fenêtre Google a été fermée. Réessayez ou autorisez les fenêtres popup.',
       'unauthorizedDomain':
           'Ce domaine n’est pas autorisé dans Firebase Authentication.',
@@ -256,6 +291,17 @@ class AppStrings {
       'contact': 'Erstellt von Francesco Fasolato',
       'language': 'Sprache',
       'authError': 'Anmeldung fehlgeschlagen. Bitte erneut versuchen.',
+      'authEmailExists': 'Diese E-Mail ist bereits registriert. Melde dich an oder verwende eine andere E-Mail.',
+      'authInvalidEmail':
+          'Diese E-Mail ist ungültig. Prüfe das Format und versuche es erneut.',
+      'authUserNotFound': 'Für diese E-Mail wurde kein Konto gefunden. Prüfe die Adresse oder erstelle ein Konto.',
+      'authWrongPassword':
+          'Falsches Passwort. Prüfe dein Passwort und versuche es erneut.',
+      'authInvalidCredential': 'Die Anmeldedaten sind ungültig. Prüfe E-Mail und Passwort und versuche es erneut.',
+      'authWeakPassword': 'Das Passwort ist zu schwach. Wähle mindestens 6 Zeichen und versuche es erneut.',
+      'authTooManyRequests':
+          'Zu viele Versuche. Bitte warte einen Moment und versuche es erneut.',
+      'authNetworkError': 'Die Verbindung ist unzugänglich oder instabil. Prüfe dein Netzwerk und versuche es erneut.',
       'popupClosed': 'Das Google-Fenster wurde geschlossen. Erlaube Popups und versuche es erneut.',
       'unauthorizedDomain':
           'Diese Domain ist in Firebase Authentication nicht autorisiert.',
@@ -292,6 +338,15 @@ class AppStrings {
       'contact': 'Creado por Francesco Fasolato',
       'language': 'Idioma',
       'authError': 'No se pudo iniciar sesión. Inténtalo de nuevo.',
+      'authEmailExists': 'Este correo ya está registrado. Intenta iniciar sesión o usa otro correo.',
+      'authInvalidEmail': 'Este correo no es válido. Comprueba el formato e inténtalo de nuevo.',
+      'authUserNotFound': 'No se encontró ninguna cuenta con este correo. Comprueba la dirección o crea una cuenta.',
+      'authWrongPassword': 'Contraseña incorrecta. Comprueba la contraseña e inténtalo de nuevo.',
+      'authInvalidCredential': 'Las credenciales no son válidas. Comprueba el correo y la contraseña e inténtalo de nuevo.',
+      'authWeakPassword': 'La contraseña es demasiado débil. Elige al menos 6 caracteres e inténtalo de nuevo.',
+      'authTooManyRequests':
+          'Demasiados intentos. Espera unos momentos y vuelve a intentarlo.',
+      'authNetworkError': 'La conexión no está disponible o es inestable. Comprueba la red e inténtalo de nuevo.',
       'popupClosed': 'La ventana de Google se cerró. Permite las ventanas emergentes y vuelve a intentarlo.',
       'unauthorizedDomain':
           'Este dominio no está autorizado en Firebase Authentication.',
@@ -328,6 +383,15 @@ class AppStrings {
       'contact': 'Criado por Francesco Fasolato',
       'language': 'Idioma',
       'authError': 'Não foi possível entrar. Tente novamente.',
+      'authEmailExists': 'Este e-mail já está registado. Tente iniciar sessão ou use outro e-mail.',
+      'authInvalidEmail':
+          'Este e-mail não é válido. Verifique o formato e tente novamente.',
+      'authUserNotFound': 'Nenhuma conta foi encontrada para este e-mail. Verifique o endereço ou crie uma conta.',
+      'authWrongPassword': 'Palavra-passe incorreta. Verifique a palavra-passe e tente novamente.',
+      'authInvalidCredential': 'As credenciais são inválidas. Verifique o e-mail e a palavra-passe e tente novamente.',
+      'authWeakPassword': 'A palavra-passe é demasiado fraca. Escolha pelo menos 6 caracteres e tente novamente.',
+      'authTooManyRequests': 'Muitas tentativas. Tente novamente mais tarde.',
+      'authNetworkError': 'A ligação está indisponível ou instável. Verifique a rede e tente novamente.',
       'popupClosed':
           'A janela do Google foi fechada. Permita popups e tente novamente.',
       'unauthorizedDomain':
@@ -365,6 +429,16 @@ class AppStrings {
       'contact': 'Создано Франческо Фасолато',
       'language': 'Язык',
       'authError': 'Не удалось войти. Повторите попытку.',
+      'authEmailExists': 'Этот адрес уже зарегистрирован. Попробуйте войти в аккаунт или используйте другой email.',
+      'authInvalidEmail':
+          'Этот email недействителен. Проверьте формат и попробуйте снова.',
+      'authUserNotFound': 'Аккаунт с этим email не найден. Проверьте адрес или создайте новый аккаунт.',
+      'authWrongPassword':
+          'Неверный пароль. Проверьте пароль и попробуйте ещё раз.',
+      'authInvalidCredential': 'Неверные учётные данные. Проверьте email и пароль и повторите попытку.',
+      'authWeakPassword': 'Пароль слишком слабый. Выберите не менее 6 символов и попробуйте снова.',
+      'authTooManyRequests': 'Слишком много попыток. Попробуйте позже.',
+      'authNetworkError': 'Подключение недоступно или нестабильно. Проверьте сеть и попробуйте ещё раз.',
       'popupClosed': 'Окно Google закрыто. Разрешите всплывающие окна и повторите попытку.',
       'unauthorizedDomain': 'Этот домен не разрешён в Firebase Authentication.',
       'popupBlocked':
@@ -400,6 +474,14 @@ class AppStrings {
       'contact': '由 Francesco Fasolato 创建',
       'language': '语言',
       'authError': '登录失败，请重试。',
+      'authEmailExists': '该邮箱已注册。请直接登录或使用其他邮箱。',
+      'authInvalidEmail': '邮箱格式无效。请检查后重试。',
+      'authUserNotFound': '未找到与此邮箱关联的账户。请检查地址或创建新账户。',
+      'authWrongPassword': '密码不正确。请检查密码后重试。',
+      'authInvalidCredential': '凭据无效。请检查邮箱和密码后重试。',
+      'authWeakPassword': '密码太弱。请选择至少 6 个字符后重试。',
+      'authTooManyRequests': '尝试次数过多。请稍后再试。',
+      'authNetworkError': '网络不可用或不稳定。请检查网络后重试。',
       'popupClosed': 'Google 窗口已关闭。请允许弹出窗口后重试。',
       'unauthorizedDomain': '此域名未获 Firebase Authentication 授权。',
       'popupBlocked': '弹出窗口被拦截。请尝试 Google 重定向。',
@@ -434,6 +516,14 @@ class AppStrings {
       'contact': 'Francesco Fasolato 作',
       'language': '言語',
       'authError': 'ログインできませんでした。もう一度お試しください。',
+      'authEmailExists': 'このメールアドレスはすでに登録されています。ログインするか別のメールアドレスをお使いください。',
+      'authInvalidEmail': 'メールアドレスの形式が正しくありません。確認してもう一度お試しください。',
+      'authUserNotFound': 'このメールアドレスのアカウントは見つかりませんでした。アドレスを確認するか新規登録してください。',
+      'authWrongPassword': 'パスワードが正しくありません。確認してもう一度お試しください。',
+      'authInvalidCredential': '認証情報が無効です。メールアドレスとパスワードを確認してもう一度お試しください。',
+      'authWeakPassword': 'パスワードが弱すぎます。6文字以上を入力してもう一度お試しください。',
+      'authTooManyRequests': '試行回数が多すぎます。しばらくしてからもう一度お試しください。',
+      'authNetworkError': '接続が利用できないか不安定です。ネットワークを確認してもう一度お試しください。',
       'popupClosed': 'Google ウィンドウが閉じられました。ポップアップを許可して再試行してください。',
       'unauthorizedDomain': 'このドメインは Firebase Authentication で許可されていません。',
       'popupBlocked': 'ポップアップがブロックされました。Google リダイレクトをお試しください。',
@@ -441,6 +531,42 @@ class AppStrings {
   };
 
   String text(String key) => _values[_language]?[key] ?? _values['en']![key]!;
+
+  String authErrorForCode(String code) {
+    final Map<String, String> values = _values[_language] ?? _values['en']!;
+    switch (code) {
+      case 'email-already-in-use':
+        return values['authEmailExists'] ?? _values['en']!['authEmailExists']!;
+      case 'invalid-email':
+        return values['authInvalidEmail'] ??
+            _values['en']!['authInvalidEmail']!;
+      case 'user-not-found':
+        return values['authUserNotFound'] ??
+            _values['en']!['authUserNotFound']!;
+      case 'wrong-password':
+        return values['authWrongPassword'] ??
+            _values['en']!['authWrongPassword']!;
+      case 'invalid-credential':
+        return values['authInvalidCredential'] ??
+            values['authUserNotFound'] ??
+            _values['en']!['authInvalidCredential']!;
+      case 'weak-password':
+        return values['authWeakPassword'] ??
+            _values['en']!['authWeakPassword']!;
+      case 'too-many-requests':
+        return values['authTooManyRequests'] ??
+            _values['en']!['authTooManyRequests']!;
+      case 'network-request-failed':
+        return values['authNetworkError'] ??
+            _values['en']!['authNetworkError']!;
+      case 'popup-closed-by-user':
+        return values['popupClosed'] ?? _values['en']!['popupClosed']!;
+      case 'popup-blocked':
+        return values['popupBlocked'] ?? _values['en']!['popupBlocked']!;
+      default:
+        return values['authError'] ?? _values['en']!['authError']!;
+    }
+  }
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppStrings> {
@@ -708,6 +834,69 @@ class AuthGate extends StatelessWidget {
   }
 }
 
+class GoogleBrandIcon extends StatelessWidget {
+  const GoogleBrandIcon({super.key, this.size = 20});
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.square(
+      dimension: size,
+      child: CustomPaint(painter: _GoogleBrandPainter()),
+    );
+  }
+}
+
+class _GoogleBrandPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final double stroke = size.width * 0.12;
+    final Rect rect = Rect.fromCenter(
+      center: Offset(size.width / 2, size.height / 2),
+      width: size.width * 0.86,
+      height: size.height * 0.86,
+    );
+
+    final Paint blue = Paint()
+      ..color = const Color(0xFF4285F4)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = stroke
+      ..strokeCap = StrokeCap.round;
+    final Paint red = Paint()
+      ..color = const Color(0xFFEA4335)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = stroke
+      ..strokeCap = StrokeCap.round;
+    final Paint yellow = Paint()
+      ..color = const Color(0xFFFBBC05)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = stroke
+      ..strokeCap = StrokeCap.round;
+    final Paint green = Paint()
+      ..color = const Color(0xFF34A853)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = stroke
+      ..strokeCap = StrokeCap.round;
+    final Paint white = Paint()..color = Colors.white;
+
+    canvas.drawArc(rect, -1.9, 3.1, false, blue);
+    canvas.drawArc(rect, 1.2, 1.3, false, red);
+    canvas.drawArc(rect, 2.5, 1.0, false, yellow);
+    canvas.drawArc(rect, 3.6, 1.0, false, green);
+
+    final Rect cutout = Rect.fromCenter(
+      center: Offset(size.width * 0.67, size.height * 0.5),
+      width: size.width * 0.42,
+      height: size.height * 0.42,
+    );
+    canvas.drawArc(cutout, 0, 2 * pi, false, white);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
 
@@ -789,13 +978,15 @@ class _AuthPageState extends State<AuthPage> {
     final AppStrings strings = AppStrings.of(context);
     switch (code) {
       case 'email-already-in-use':
-        return strings.text('authError');
+        return strings.authErrorForCode(code);
+      case 'invalid-email':
       case 'invalid-credential':
       case 'wrong-password':
       case 'user-not-found':
-        return strings.text('authError');
       case 'weak-password':
-        return strings.text('authError');
+      case 'too-many-requests':
+      case 'network-request-failed':
+        return strings.authErrorForCode(code);
       case 'popup-closed-by-user':
         return strings.text('popupClosed');
       case 'popup-blocked':
@@ -803,7 +994,7 @@ class _AuthPageState extends State<AuthPage> {
       case 'unauthorized-domain':
         return strings.text('unauthorizedDomain');
       default:
-        return strings.text('authError');
+        return strings.authErrorForCode(code);
     }
   }
 
@@ -811,6 +1002,7 @@ class _AuthPageState extends State<AuthPage> {
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
     return Scaffold(
+      backgroundColor: AppDesign.canvas,
       body: BoardBackdrop(
         child: Stack(
           children: <Widget>[
@@ -820,147 +1012,300 @@ class _AuthPageState extends State<AuthPage> {
                 padding: const EdgeInsets.fromLTRB(24, 24, 24, 56),
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 460),
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.035),
-                      borderRadius: BorderRadius.circular(
-                        AppDesign.radiusLarge,
+                  child: TweenAnimationBuilder<double>(
+                    tween: Tween<double>(begin: 0.96, end: 1),
+                    duration: AppDesign.motionMedium,
+                    curve: AppDesign.motionCurve,
+                    builder:
+                        (BuildContext context, double value, Widget? child) {
+                          return Transform.scale(scale: value, child: child);
+                        },
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.025),
+                        borderRadius: BorderRadius.circular(
+                          AppDesign.radiusLarge,
+                        ),
+                        border: Border.all(
+                          color: Colors.white.withValues(alpha: 0.10),
+                        ),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: AppDesign.teal.withValues(alpha: 0.08),
+                            blurRadius: 24,
+                            spreadRadius: 1,
+                          ),
+                        ],
                       ),
-                      border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.08),
-                      ),
-                    ),
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(28, 30, 28, 26),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Semantics(
-                                label: 'Logo BoardGamePlayer',
-                                child: Container(
-                                  padding: const EdgeInsets.all(16),
-                                  decoration: BoxDecoration(
-                                    color: AppDesign.gold.withValues(
-                                      alpha: 0.12,
+                      child: Card(
+                        color: const Color(0xFF0C1B20),
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                            AppDesign.radiusLarge,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(28, 30, 28, 26),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                TweenAnimationBuilder<double>(
+                                  tween: Tween<double>(begin: 0.92, end: 1),
+                                  duration: AppDesign.motionMedium,
+                                  curve: AppDesign.motionCurve,
+                                  builder:
+                                      (
+                                        BuildContext context,
+                                        double value,
+                                        Widget? child,
+                                      ) {
+                                        return Transform.scale(
+                                          scale: value,
+                                          child: child,
+                                        );
+                                      },
+                                  child: Container(
+                                    width: 82,
+                                    height: 82,
+                                    decoration: BoxDecoration(
+                                      color: AppDesign.teal.withValues(
+                                        alpha: 0.18,
+                                      ),
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.white.withValues(
+                                          alpha: 0.08,
+                                        ),
+                                      ),
                                     ),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: const Icon(
-                                    Icons.auto_awesome,
-                                    size: 34,
-                                    color: AppDesign.goldSoft,
+                                    child: const Icon(
+                                      Icons.auto_awesome_rounded,
+                                      color: AppDesign.goldSoft,
+                                      size: 36,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 20),
-                              Text(
-                                'BOARDGAMEPLAYER',
-                                style: Theme.of(context).textTheme.labelMedium
-                                    ?.copyWith(
-                                      color: AppDesign.goldSoft,
-                                      letterSpacing: 2.4,
+                                const SizedBox(height: 22),
+                                Text(
+                                  'BOARDGAMEPLAYER',
+                                  style: Theme.of(context).textTheme.labelLarge
+                                      ?.copyWith(
+                                        color: AppDesign.goldSoft,
+                                        letterSpacing: 2.5,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  _isRegistering
+                                      ? strings.text('registerWelcome')
+                                      : strings.text('loginWelcome'),
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.w800,
+                                        color: AppDesign.text,
+                                      ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  strings.text('loginDescription'),
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.bodyLarge
+                                      ?.copyWith(color: AppDesign.textMuted),
+                                ),
+                                const SizedBox(height: 26),
+                                TextFormField(
+                                  controller: _emailController,
+                                  keyboardType: TextInputType.emailAddress,
+                                  textInputAction: TextInputAction.next,
+                                  decoration: InputDecoration(
+                                    labelText: strings.text('email'),
+                                    prefixIcon: const Icon(
+                                      Icons.alternate_email_rounded,
+                                    ),
+                                    filled: true,
+                                    fillColor: const Color(0xFF112529),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 18,
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      borderSide: BorderSide(
+                                        color: Colors.white.withValues(
+                                          alpha: 0.10,
+                                        ),
+                                      ),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      borderSide: BorderSide(
+                                        color: Colors.white.withValues(
+                                          alpha: 0.10,
+                                        ),
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      borderSide: const BorderSide(
+                                        color: AppDesign.teal,
+                                        width: 1.4,
+                                      ),
+                                    ),
+                                  ),
+                                  validator: (String? value) =>
+                                      value == null || !value.contains('@')
+                                      ? 'Inserisci un’email valida'
+                                      : null,
+                                ),
+                                const SizedBox(height: 18),
+                                TextFormField(
+                                  controller: _passwordController,
+                                  obscureText: true,
+                                  textInputAction: TextInputAction.done,
+                                  onFieldSubmitted: (_) =>
+                                      _busy ? null : _submitEmail(),
+                                  decoration: InputDecoration(
+                                    labelText: strings.text('password'),
+                                    prefixIcon: const Icon(
+                                      Icons.lock_outline_rounded,
+                                    ),
+                                    filled: true,
+                                    fillColor: const Color(0xFF112529),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 18,
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      borderSide: BorderSide(
+                                        color: Colors.white.withValues(
+                                          alpha: 0.10,
+                                        ),
+                                      ),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      borderSide: BorderSide(
+                                        color: Colors.white.withValues(
+                                          alpha: 0.10,
+                                        ),
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      borderSide: const BorderSide(
+                                        color: AppDesign.teal,
+                                        width: 1.4,
+                                      ),
+                                    ),
+                                  ),
+                                  validator: (String? value) =>
+                                      value == null || value.length < 6
+                                      ? 'Almeno 6 caratteri'
+                                      : null,
+                                ),
+                                if (_error != null) ...<Widget>[
+                                  const SizedBox(height: 16),
+                                  Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                      vertical: 10,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).colorScheme.error
+                                          .withValues(alpha: 0.12),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Text(
+                                      _error!,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .error,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                                const SizedBox(height: 22),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: FilledButton.icon(
+                                    onPressed: _busy ? null : _submitEmail,
+                                    icon: Icon(
+                                      _isRegistering
+                                          ? Icons.person_add_rounded
+                                          : Icons.login_rounded,
+                                    ),
+                                    label: Text(
+                                      _isRegistering
+                                          ? strings.text('register')
+                                          : strings.text('login'),
+                                    ),
+                                    style: FilledButton.styleFrom(
+                                      backgroundColor: AppDesign.teal,
+                                      foregroundColor: AppDesign.ink,
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 16,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                TextButton(
+                                  onPressed: _busy
+                                      ? null
+                                      : () => setState(() {
+                                          _isRegistering = !_isRegistering;
+                                          _error = null;
+                                        }),
+                                  child: Text(
+                                    _isRegistering
+                                        ? strings.text('existingAccount')
+                                        : strings.text('newAccount'),
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.w700,
                                     ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                _isRegistering
-                                    ? strings.text('registerWelcome')
-                                    : strings.text('loginWelcome'),
-                                style: Theme.of(context).textTheme.headlineSmall
-                                    ?.copyWith(fontWeight: FontWeight.w700),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                strings.text('loginDescription'),
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.bodyMedium
-                                    ?.copyWith(color: AppDesign.textMuted),
-                              ),
-                              const SizedBox(height: 26),
-                              TextFormField(
-                                controller: _emailController,
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: InputDecoration(
-                                  labelText: strings.text('email'),
-                                  prefixIcon: const Icon(Icons.alternate_email),
+                                  ),
                                 ),
-                                validator: (String? value) =>
-                                    value == null || !value.contains('@')
-                                    ? 'Inserisci un’email valida'
-                                    : null,
-                              ),
-                              const SizedBox(height: 12),
-                              TextFormField(
-                                controller: _passwordController,
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  labelText: strings.text('password'),
-                                  prefixIcon: const Icon(Icons.lock_outline),
-                                ),
-                                validator: (String? value) =>
-                                    value == null || value.length < 6
-                                    ? 'Almeno 6 caratteri'
-                                    : null,
-                              ),
-                              if (_error != null) ...<Widget>[
-                                const SizedBox(height: 12),
-                                Text(
-                                  _error!,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Theme.of(context).colorScheme.error,
+                                const Divider(height: 26),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: OutlinedButton.icon(
+                                    onPressed: _busy ? null : _signInWithGoogle,
+                                    icon: const GoogleBrandIcon(size: 22),
+                                    label: Text(strings.text('google')),
+                                    style: OutlinedButton.styleFrom(
+                                      foregroundColor: AppDesign.text,
+                                      side: BorderSide(
+                                        color: Colors.white.withValues(
+                                          alpha: 0.18,
+                                        ),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 15,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
-                              const SizedBox(height: 20),
-                              SizedBox(
-                                width: double.infinity,
-                                child: FilledButton.icon(
-                                  onPressed: _busy ? null : _submitEmail,
-                                  icon: Icon(
-                                    _isRegistering
-                                        ? Icons.person_add
-                                        : Icons.login,
-                                  ),
-                                  label: Text(
-                                    _isRegistering
-                                        ? strings.text('register')
-                                        : strings.text('login'),
-                                  ),
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: _busy
-                                    ? null
-                                    : () => setState(() {
-                                        _isRegistering = !_isRegistering;
-                                        _error = null;
-                                      }),
-                                child: Text(
-                                  _isRegistering
-                                      ? strings.text('existingAccount')
-                                      : strings.text('newAccount'),
-                                ),
-                              ),
-                              const Divider(height: 24),
-                              SizedBox(
-                                width: double.infinity,
-                                child: OutlinedButton.icon(
-                                  onPressed: _busy ? null : _signInWithGoogle,
-                                  icon: const Icon(
-                                    Icons.g_mobiledata,
-                                    size: 28,
-                                  ),
-                                  label: Text(strings.text('google')),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
@@ -1415,11 +1760,14 @@ class GameStore {
     final User? user = _currentUser;
     final String storageKey = _storageKeyForCurrentUser();
     final String? raw = preferences.getString(storageKey);
-    final List<Game> localGames = _decode(raw ?? preferences.getString(key));
 
     if (user == null) {
-      return localGames;
+      final String? guestRaw = preferences.getString(storageKey);
+      final String? legacyRaw = preferences.getString(key);
+      return _decode(guestRaw ?? legacyRaw);
     }
+
+    final List<Game> localGames = _decode(raw);
 
     try {
       final DocumentSnapshot<Map<String, dynamic>> snapshot =
@@ -1866,11 +2214,7 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                         ),
                       ),
                     ),
-                    Positioned(
-                      right: 100,
-                      bottom: 30,
-                      child: CreditsFooter(),
-                    ),
+                    Positioned(right: 100, bottom: 30, child: CreditsFooter()),
                   ],
                 ),
         ),
