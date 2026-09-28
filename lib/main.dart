@@ -103,6 +103,14 @@ final ValueNotifier<Locale> appLocale = ValueNotifier<Locale>(
   supportedLocales.first,
 );
 
+String? validateGameNameInput(String? rawValue) {
+  final String value = (rawValue ?? '').trim();
+  if (value.isEmpty) {
+    return null;
+  }
+  return value;
+}
+
 class AppStrings {
   const AppStrings(this.locale);
 
@@ -1968,8 +1976,8 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
           ),
           FilledButton(
             onPressed: () {
-              final String value = controller.text.trim();
-              if (value.isNotEmpty && RegExp(r'[A-Za-zÀ-ÿ]').hasMatch(value)) {
+              final String? value = validateGameNameInput(controller.text);
+              if (value != null) {
                 Navigator.pop(dialogContext, value);
               }
             },

@@ -73,6 +73,12 @@ void main() {
     expect(GameStore.storageKeyForUser(null), 'board_game_player_games_guest');
   });
 
+  test('validateGameNameInput accetta nomi numerici ma rifiuta stringhe vuote', () {
+    expect(validateGameNameInput('123123'), '123123');
+    expect(validateGameNameInput('  '), isNull);
+    expect(validateGameNameInput('Catan'), 'Catan');
+  });
+
   test('AppStrings returns clear auth error messages for Firebase codes', () {
     final AppStrings italian = AppStrings(const Locale('it'));
     expect(
