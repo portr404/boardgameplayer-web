@@ -628,7 +628,9 @@ class LanguagePicker extends StatelessWidget {
 }
 
 class CreditsFooter extends StatelessWidget {
-  const CreditsFooter({super.key});
+  const CreditsFooter({super.key, this.compact = false});
+
+  final bool compact;
 
   Future<void> _openContactEmail() async {
     final String subject = Uri.encodeComponent(
@@ -646,30 +648,46 @@ class CreditsFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.035),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
-      ),
-      child: Semantics(
-        link: true,
-        label: 'Contatta Francesco Fasolato per segnalazioni o recensioni',
-        child: TextButton(
-          onPressed: _openContactEmail,
-          style: TextButton.styleFrom(
-            foregroundColor: AppDesign.textMuted,
-            padding: EdgeInsets.zero,
-            minimumSize: const Size(52, 26),
-            tapTargetSize: MaterialTapTargetSize.padded,
-            textStyle: const TextStyle(
-              fontSize: 11,
-              letterSpacing: 0.2,
-              fontWeight: FontWeight.w600,
+    final double textSize = compact ? 8.5 : 11;
+    final double verticalPadding = compact ? 3 : 6;
+    final double horizontalPadding = compact ? 7 : 10;
+
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: compact ? 200 : 260),
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding,
+          vertical: verticalPadding,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.035),
+          borderRadius: BorderRadius.circular(999),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+        ),
+        child: Semantics(
+          link: true,
+          label: 'Contatta Francesco Fasolato per segnalazioni o recensioni',
+          child: TextButton(
+            onPressed: _openContactEmail,
+            style: TextButton.styleFrom(
+              foregroundColor: AppDesign.textMuted,
+              padding: EdgeInsets.zero,
+              minimumSize: Size(52, compact ? 20 : 26),
+              tapTargetSize: MaterialTapTargetSize.padded,
+              textStyle: TextStyle(
+                fontSize: textSize,
+                letterSpacing: compact ? 0.1 : 0.2,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            child: Text(
+              strings.text('contact'),
+              textAlign: TextAlign.center,
+              maxLines: compact ? 2 : 1,
+              softWrap: true,
+              overflow: TextOverflow.visible,
             ),
           ),
-          child: Text(strings.text('contact')),
         ),
       ),
     );
@@ -2049,6 +2067,8 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
+    final Size screenSize = MediaQuery.sizeOf(context);
+    final bool isCompactMobile = screenSize.width < 420;
     return Scaffold(
       backgroundColor: AppDesign.canvas,
       appBar: AppBar(
@@ -2222,7 +2242,19 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                         ),
                       ),
                     ),
-                    Positioned(right: 100, bottom: 30, child: CreditsFooter()),
+                    if (isCompactMobile)
+                      Positioned(
+                        left: 12,
+                        right: 12,
+                        bottom: 96,
+                        child: Center(child: CreditsFooter(compact: true)),
+                      )
+                    else
+                      Positioned(
+                        right: 100,
+                        bottom: 30,
+                        child: CreditsFooter(),
+                      ),
                   ],
                 ),
         ),
