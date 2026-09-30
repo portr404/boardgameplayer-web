@@ -661,7 +661,7 @@ class CreditsFooter extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: 0.035),
-          borderRadius: BorderRadius.circular(999),
+          borderRadius: BorderRadius.circular(compact ? 12 : 999),
           border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
         ),
         child: Semantics(
@@ -683,7 +683,7 @@ class CreditsFooter extends StatelessWidget {
             child: Text(
               strings.text('contact'),
               textAlign: TextAlign.center,
-              maxLines: compact ? 2 : 1,
+              maxLines: compact ? null : 1,
               softWrap: true,
               overflow: TextOverflow.visible,
             ),
@@ -1886,15 +1886,17 @@ class DiceLauncherButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     this.label = 'Lancia dadi',
+    this.width = 200,
   });
 
   final VoidCallback? onPressed;
   final String label;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 200,
+      width: width,
       child: FloatingActionButton.extended(
         heroTag: 'dice-launcher-main',
         onPressed: onPressed,
@@ -2061,8 +2063,12 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     final AppStrings strings = AppStrings.of(context);
-    final Size screenSize = MediaQuery.sizeOf(context);
-    final bool isCompactMobile = screenSize.width < 420;
+    final double availableWidth = MediaQuery.sizeOf(context).width;
+    final bool useCompactFooter = availableWidth < 960;
+    final double diceWidth = availableWidth < 400 ? availableWidth * 0.5 : 200;
+    final double creditsWidth = ((availableWidth - diceWidth) / 2 - 24)
+        .clamp(0, 220)
+        .toDouble();
     return Scaffold(
       backgroundColor: AppDesign.canvas,
       appBar: AppBar(
@@ -2233,15 +2239,16 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                         child: DiceLauncherButton(
                           onPressed: () => showDiceSheet(context),
                           label: strings.text('dice'),
+                          width: diceWidth,
                         ),
                       ),
                     ),
-                    if (isCompactMobile)
+                    if (useCompactFooter)
                       Positioned(
                         left: 12,
-                        right: 12,
-                        bottom: 96,
-                        child: Center(child: CreditsFooter(compact: true)),
+                        bottom: 34,
+                        width: creditsWidth,
+                        child: CreditsFooter(compact: true),
                       )
                     else
                       Positioned(

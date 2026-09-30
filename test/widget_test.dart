@@ -321,6 +321,25 @@ void main() {
 
     expect(find.text('BoardGamePlayer'), findsOneWidget);
   });
+
+  testWidgets(
+    'i crediti restano a sinistra del pulsante dadi su telefono e tablet',
+    (WidgetTester tester) async {
+      SharedPreferences.setMockInitialValues(<String, Object>{});
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+
+      for (final double screenWidth in <double>[320, 440, 768]) {
+        tester.view.physicalSize = Size(screenWidth, 900);
+        await tester.pumpWidget(const MaterialApp(home: GamesPage()));
+        await tester.pumpAndSettle();
+
+        final Rect credits = tester.getRect(find.byType(CreditsFooter));
+        final Rect diceButton = tester.getRect(find.byType(DiceLauncherButton));
+        expect(credits.right, lessThanOrEqualTo(diceButton.left - 8));
+      }
+    },
+  );
 }
 
 class FakeRandomSource implements RandomSource {
