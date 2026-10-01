@@ -322,6 +322,24 @@ void main() {
     expect(find.text('BoardGamePlayer'), findsOneWidget);
   });
 
+  testWidgets('il login nasconde i crediti e mantiene accessibile la lingua', (
+    WidgetTester tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(390, 844);
+    addTearDown(tester.view.resetPhysicalSize);
+
+    await tester.pumpWidget(const MaterialApp(home: AuthPage()));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(CreditsFooter), findsNothing);
+    expect(find.byType(LanguagePicker), findsOneWidget);
+
+    await tester.tap(find.byType(LanguagePicker));
+    await tester.pumpAndSettle();
+    expect(find.text('🇬🇧'), findsOneWidget);
+  });
+
   testWidgets(
     'i crediti restano a sinistra del pulsante dadi su telefono e tablet',
     (WidgetTester tester) async {

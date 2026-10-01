@@ -1032,7 +1032,6 @@ class _AuthPageState extends State<AuthPage> {
       body: BoardBackdrop(
         child: Stack(
           children: <Widget>[
-            const Positioned(top: 12, right: 12, child: LanguagePicker()),
             Center(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(24, 24, 24, 56),
@@ -1338,6 +1337,14 @@ class _AuthPageState extends State<AuthPage> {
                     ),
                   ),
                 ),
+              ),
+            ),
+            const Positioned(
+              top: 12,
+              right: 12,
+              child: Material(
+                color: Colors.transparent,
+                child: LanguagePicker(),
               ),
             ),
           ],
