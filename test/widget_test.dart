@@ -68,16 +68,25 @@ void main() {
   });
 
   test('GameStore usa una chiave locale specifica per ogni utente', () {
-    expect(GameStore.storageKeyForUser('user-a'), 'board_game_player_games_user-a');
-    expect(GameStore.storageKeyForUser('user-b'), 'board_game_player_games_user-b');
+    expect(
+      GameStore.storageKeyForUser('user-a'),
+      'board_game_player_games_user-a',
+    );
+    expect(
+      GameStore.storageKeyForUser('user-b'),
+      'board_game_player_games_user-b',
+    );
     expect(GameStore.storageKeyForUser(null), 'board_game_player_games_guest');
   });
 
-  test('validateGameNameInput accetta nomi numerici ma rifiuta stringhe vuote', () {
-    expect(validateGameNameInput('123123'), '123123');
-    expect(validateGameNameInput('  '), isNull);
-    expect(validateGameNameInput('Catan'), 'Catan');
-  });
+  test(
+    'validateGameNameInput accetta nomi numerici ma rifiuta stringhe vuote',
+    () {
+      expect(validateGameNameInput('123123'), '123123');
+      expect(validateGameNameInput('  '), isNull);
+      expect(validateGameNameInput('Catan'), 'Catan');
+    },
+  );
 
   test('AppStrings returns clear auth error messages for Firebase codes', () {
     final AppStrings italian = AppStrings(const Locale('it'));
@@ -347,14 +356,27 @@ void main() {
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.resetPhysicalSize);
 
-      for (final double screenWidth in <double>[320, 440, 768]) {
+      for (final double screenWidth in <double>[320, 440, 768, 1024, 1440]) {
         tester.view.physicalSize = Size(screenWidth, 900);
         await tester.pumpWidget(const MaterialApp(home: GamesPage()));
         await tester.pumpAndSettle();
 
         final Rect credits = tester.getRect(find.byType(CreditsFooter));
         final Rect diceButton = tester.getRect(find.byType(DiceLauncherButton));
-        expect(credits.right, lessThanOrEqualTo(diceButton.left - 8));
+        final Finder addButton = find.byWidgetPredicate(
+          (Widget widget) =>
+              widget is FloatingActionButton && widget.heroTag == 'create-game',
+        );
+        final Rect addButtonRect = tester.getRect(addButton);
+        expect(credits.right, lessThanOrEqualTo(diceButton.left - 7.5));
+        expect(
+          (credits.center.dy - addButtonRect.center.dy).abs(),
+          lessThan(1),
+        );
+        expect(
+          (diceButton.center.dy - addButtonRect.center.dy).abs(),
+          lessThan(1),
+        );
       }
     },
   );

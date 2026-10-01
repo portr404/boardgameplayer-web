@@ -2073,9 +2073,18 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
     final double availableWidth = MediaQuery.sizeOf(context).width;
     final bool useCompactFooter = availableWidth < 960;
     final double diceWidth = availableWidth < 400 ? availableWidth * 0.5 : 200;
-    final double creditsWidth = ((availableWidth - diceWidth) / 2 - 24)
-        .clamp(0, 220)
+    final double actionBarWidth = availableWidth - 24;
+    final double creditsWidth = ((actionBarWidth - diceWidth) / 2 - 8)
+        .clamp(52, 220)
         .toDouble();
+    final Widget createGameButton = FloatingActionButton(
+      heroTag: 'create-game',
+      onPressed: addGame,
+      tooltip: strings.text('newGame'),
+      backgroundColor: AppDesign.gold,
+      foregroundColor: AppDesign.ink,
+      child: const Icon(Icons.add),
+    );
     return Scaffold(
       backgroundColor: AppDesign.canvas,
       appBar: AppBar(
@@ -2091,19 +2100,37 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
       ),
       floatingActionButton: loading
           ? null
-          : Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const SizedBox(width: 16),
-                FloatingActionButton(
-                  heroTag: 'create-game',
-                  onPressed: addGame,
-                  tooltip: strings.text('newGame'),
-                  backgroundColor: AppDesign.gold,
-                  foregroundColor: AppDesign.ink,
-                  child: const Icon(Icons.add),
-                ),
-              ],
+          : SizedBox(
+              width: actionBarWidth,
+              height: 72,
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: creditsWidth,
+                    child: Center(
+                      child: CreditsFooter(compact: useCompactFooter),
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: Center(
+                      child: DiceLauncherButton(
+                        onPressed: () => showDiceSheet(context),
+                        label: strings.text('dice'),
+                        width: diceWidth,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    child: Center(child: createGameButton),
+                  ),
+                ],
+              ),
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: BoardBackdrop(
@@ -2238,31 +2265,6 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                               ),
                       ),
                     ),
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      bottom: 34,
-                      child: Center(
-                        child: DiceLauncherButton(
-                          onPressed: () => showDiceSheet(context),
-                          label: strings.text('dice'),
-                          width: diceWidth,
-                        ),
-                      ),
-                    ),
-                    if (useCompactFooter)
-                      Positioned(
-                        left: 12,
-                        bottom: 34,
-                        width: creditsWidth,
-                        child: CreditsFooter(compact: true),
-                      )
-                    else
-                      Positioned(
-                        right: 100,
-                        bottom: 30,
-                        child: CreditsFooter(),
-                      ),
                   ],
                 ),
         ),
