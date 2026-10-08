@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:progettino_ios/main.dart';
@@ -283,6 +285,130 @@ void main() {
       expect(find.byTooltip('Aggiungi giocatore'), findsOneWidget);
     },
   );
+
+  testWidgets(
+    'il reset della partita ripristina statistiche e conserva i metadati',
+    (WidgetTester tester) async {
+      SharedPreferences.setMockInitialValues(<String, Object>{});
+      final Game game = Game(
+        id: 'game-reset',
+        name: 'Catan',
+        createdAt: DateTime.utc(2026, 1, 2, 3, 4, 5),
+      );
+      game.players.addAll(<Player>[
+        Player(id: 1, name: 'Alice'),
+        Player(id: 2, name: 'Bob'),
+      ]);
+      game.players.first
+        ..elapsed = const Duration(seconds: 42)
+        ..turns = 7
+        ..score = 12.5
+        ..scoreStep = 5;
+      game.players.first.timerState = TimerState.running;
+      game.players.first.timer = Timer.periodic(
+        const Duration(seconds: 1),
+        (_) {},
+      );
+      game.players.last
+        ..elapsed = const Duration(minutes: 3)
+        ..turns = 11
+        ..score = -4.25
+        ..scoreStep = 10;
+      game.selectedFirstPlayerId = game.players.first.id;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: GameDetailPage(
+            game: game,
+            store: GameStore(),
+            games: <Game>[game],
+          ),
+        ),
+      );
+
+      expect(find.byTooltip('Reset statistiche partita'), findsOneWidget);
+      await tester.tap(find.byTooltip('Reset statistiche partita'));
+      await tester.pumpAndSettle();
+      expect(find.text('Reset statistiche partita'), findsOneWidget);
+      expect(
+        find.text('Vuoi azzerare le statistiche di tutti i giocatori?'),
+        findsOneWidget,
+      );
+
+      await tester.tap(find.text('AZZERA'));
+      await tester.pumpAndSettle();
+
+      expect(game.players.first.name, 'Alice');
+      expect(game.players.first.id, 1);
+      expect(game.players.first.elapsed, Duration.zero);
+      expect(game.players.first.turns, 0);
+      expect(game.players.first.score, 0);
+      expect(game.players.first.scoreStep, 1);
+      expect(game.players.first.timerState, TimerState.stopped);
+      expect(game.players.last.name, 'Bob');
+      expect(game.players.last.id, 2);
+      expect(game.players.last.elapsed, Duration.zero);
+      expect(game.players.last.turns, 0);
+      expect(game.players.last.score, 0);
+      expect(game.players.last.scoreStep, 1);
+      expect(game.players.last.timerState, TimerState.stopped);
+      expect(game.name, 'Catan');
+      expect(game.id, 'game-reset');
+      expect(game.createdAt, DateTime.utc(2026, 1, 2, 3, 4, 5));
+      expect(game.players, hasLength(2));
+      expect(game.selectedFirstPlayerId, game.players.first.id);
+    },
+  );
+
+  testWidgets('il ruolo è editabile e le schede possono essere riordinate', (
+    WidgetTester tester,
+  ) async {
+    SharedPreferences.setMockInitialValues(<String, Object>{});
+    final Game game = Game(id: 'game-role-order', name: 'Catan');
+    game.players.addAll(<Player>[
+      Player(id: 1, name: 'Alice'),
+      Player(id: 2, name: 'Bob'),
+    ]);
+    final GameStore store = GameStore();
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: GameDetailPage(game: game, store: store, games: <Game>[game]),
+      ),
+    );
+
+    final roleField = find.widgetWithText(TextFormField, 'Ruolo');
+    expect(roleField, findsNWidgets(2));
+    await tester.enterText(roleField.first, 'Dungeon Master');
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump();
+    expect(game.players.first.role, 'Dungeon Master');
+
+    final PlayerCard firstCard = tester.widget<PlayerCard>(
+      find.byType(PlayerCard).first,
+    );
+    expect(firstCard.player.name, 'Alice');
+    final Finder firstPlayerMoveDown = find
+        .byTooltip('Sposta giocatore in giù')
+        .first;
+    await tester.tap(firstPlayerMoveDown);
+    await tester.pump();
+
+    final List<PlayerCard> cards = tester
+        .widgetList<PlayerCard>(find.byType(PlayerCard))
+        .toList();
+    expect(cards.map((card) => card.player.id), <int>[2, 1]);
+    expect(cards.first.player.role, '');
+    expect(cards.last.player.role, 'Dungeon Master');
+
+    final List<Game> loaded = await store.load();
+    expect(loaded.single.players.map((Player player) => player.id), <int>[
+      2,
+      1,
+    ]);
+    expect(loaded.single.players.first.role, '');
+    expect(loaded.single.players.last.role, 'Dungeon Master');
+  });
 
   testWidgets(
     'il tavolo vuoto lascia disabilitato il primo giocatore ma mantiene attivo il lancio dadi',

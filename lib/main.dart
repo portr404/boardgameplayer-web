@@ -154,6 +154,41 @@ class AppStrings {
       'updated': 'Aggiornata il',
       'contact': 'Creato da Francesco Fasolato',
       'language': 'Lingua',
+      'appName': 'BoardGamePlayer',
+      'gameName': 'Nome della partita',
+      'gameNameHint': 'Es. Serata del venerdì',
+      'editGame': 'Modifica partita',
+      'newGameDialog': 'Nuova partita',
+      'deleteGame': 'Elimina partita',
+      'deleteGameDescription':
+          'Saranno eliminati anche giocatori e statistiche di "{name}".',
+      'playerName': 'Nome del giocatore',
+      'editPlayerName': 'Modifica nome',
+      'chooseIcon': 'Scegli miniatura',
+      'iconNumber': 'Miniatura {number}',
+      'role': 'Ruolo',
+      'roleHint': 'Es. Presidente, Gestore…',
+      'player': 'Giocatore',
+      'firstPlayerBadge': 'PRIMO',
+      'startTurn': 'Inizia il turno',
+      'moveUp': 'Sposta giocatore in sù',
+      'moveDown': 'Sposta giocatore in giù',
+      'removePlayer': 'Elimina giocatore',
+      'removePlayerDescription': 'Vuoi eliminare {name}?',
+      'time': 'Tempo',
+      'turns': 'Turni',
+      'score': 'Punteggio',
+      'stopTimer': 'Azzera timer',
+      'pause': 'Pausa',
+      'play': 'Avvia',
+      'resetStats': 'Reset statistiche partita',
+      'resetStatsDescription':
+          'Vuoi azzerare le statistiche di tutti i giocatori?',
+      'reset': 'AZZERA',
+      'turnsValue': 'Turni (0-99)',
+      'scoreValue': 'Punteggio',
+      'editTurns': 'Modifica turni',
+      'editScore': 'Modifica punteggio',
       'authError': 'Accesso non riuscito. Riprova.',
       'authEmailExists': 'Questa email è già registrata. Prova ad accedere oppure usa un’altra email.',
       'authInvalidEmail':
@@ -203,6 +238,40 @@ class AppStrings {
       'updated': 'Updated on',
       'contact': 'Created by Francesco Fasolato',
       'language': 'Language',
+      'appName': 'BoardGamePlayer',
+      'gameName': 'Game name',
+      'gameNameHint': 'E.g. Friday evening',
+      'editGame': 'Edit game',
+      'newGameDialog': 'New game',
+      'deleteGame': 'Delete game',
+      'deleteGameDescription': 'The players and their statistics will also be deleted from "{name}".',
+      'playerName': 'Player name',
+      'editPlayerName': 'Edit name',
+      'chooseIcon': 'Choose avatar',
+      'iconNumber': 'Avatar {number}',
+      'role': 'Role',
+      'roleHint': 'E.g. President, Manager…',
+      'player': 'Player',
+      'firstPlayerBadge': 'FIRST',
+      'startTurn': 'Starts the turn',
+      'moveUp': 'Move player up',
+      'moveDown': 'Move player down',
+      'removePlayer': 'Delete player',
+      'removePlayerDescription': 'Do you want to delete {name}?',
+      'time': 'Time',
+      'turns': 'Turns',
+      'score': 'Score',
+      'stopTimer': 'Stop timer',
+      'pause': 'Pause',
+      'play': 'Play',
+      'resetStats': 'Reset game statistics',
+      'resetStatsDescription':
+          'Do you want to reset the statistics of all players?',
+      'reset': 'RESET',
+      'turnsValue': 'Turns (0-99)',
+      'scoreValue': 'Score',
+      'editTurns': 'Edit turns',
+      'editScore': 'Edit score',
       'authError': 'Sign-in failed. Try again.',
       'authEmailExists': 'This email is already registered. Try signing in or use a different email.',
       'authInvalidEmail':
@@ -251,6 +320,40 @@ class AppStrings {
       'updated': 'Mise à jour le',
       'contact': 'Créé par Francesco Fasolato',
       'language': 'Langue',
+      'appName': 'BoardGamePlayer',
+      'gameName': 'Nom de la partie',
+      'gameNameHint': 'Ex. Soirée vendredi',
+      'editGame': 'Modifier la partie',
+      'newGameDialog': 'Nouvelle partie',
+      'deleteGame': 'Supprimer la partie',
+      'deleteGameDescription': 'Les joueurs et leurs statistiques seront également supprimés de "{name}".',
+      'playerName': 'Nom du joueur',
+      'editPlayerName': 'Modifier le nom',
+      'chooseIcon': 'Choisir l’avatar',
+      'iconNumber': 'Avatar {number}',
+      'role': 'Rôle',
+      'roleHint': 'Ex. Président, Gestionnaire…',
+      'player': 'Joueur',
+      'firstPlayerBadge': 'PREMIER',
+      'startTurn': 'Commence le tour',
+      'moveUp': 'Mover le joueur vers le haut',
+      'moveDown': 'Mover le joueur vers le bas',
+      'removePlayer': 'Supprimer le joueur',
+      'removePlayerDescription': 'Voulez-vous supprimer {name} ?',
+      'time': 'Temps',
+      'turns': 'Tours',
+      'score': 'Score',
+      'stopTimer': 'Arrêter le chronomètre',
+      'pause': 'Pause',
+      'play': 'Jouer',
+      'resetStats': 'Réinitialiser les statistiques',
+      'resetStatsDescription':
+          'Voulez-vous réinitialiser les statistiques de tous les joueurs ?',
+      'reset': 'RÉINITIALISER',
+      'turnsValue': 'Tours (0-99)',
+      'scoreValue': 'Score',
+      'editTurns': 'Modifier les tours',
+      'editScore': 'Modifier le score',
       'authError': 'Échec de la connexion. Réessayez.',
       'authEmailExists': 'Cette adresse e-mail est déjà enregistrée. Essayez de vous connecter ou utilisez une autre adresse.',
       'authInvalidEmail':
@@ -298,6 +401,41 @@ class AppStrings {
       'updated': 'Aktualisiert am',
       'contact': 'Erstellt von Francesco Fasolato',
       'language': 'Sprache',
+      'appName': 'BoardGamePlayer',
+      'gameName': 'Spielname',
+      'gameNameHint': 'Z.B. Freitagabend',
+      'editGame': 'Spiel bearbeiten',
+      'newGameDialog': 'Neues Spiel',
+      'deleteGame': 'Spiel löschen',
+      'deleteGameDescription':
+          'Die Spieler und ihre Statistiken werden auch aus "{name}" gelöscht.',
+      'playerName': 'Spielername',
+      'editPlayerName': 'Name bearbeiten',
+      'chooseIcon': 'Avatar auswählen',
+      'iconNumber': 'Avatar {number}',
+      'role': 'Rolle',
+      'roleHint': 'Z.B. Präsident, Manager…',
+      'player': 'Spieler',
+      'firstPlayerBadge': 'ERSTER',
+      'startTurn': 'Startet den Zug',
+      'moveUp': 'Spieler nach oben verschieben',
+      'moveDown': 'Spieler nach unten verschieben',
+      'removePlayer': 'Spieler löschen',
+      'removePlayerDescription': 'Möchtest du {name} löschen?',
+      'time': 'Zeit',
+      'turns': 'Züge',
+      'score': 'Punkte',
+      'stopTimer': 'Timer stoppen',
+      'pause': 'Pause',
+      'play': 'Abspielen',
+      'resetStats': 'Statistiken zurücksetzen',
+      'resetStatsDescription':
+          'Möchtest du die Statistiken aller Spieler zurücksetzen?',
+      'reset': 'ZURÜCKSETZEN',
+      'turnsValue': 'Züge (0-99)',
+      'scoreValue': 'Punkte',
+      'editTurns': 'Züge bearbeiten',
+      'editScore': 'Punkte bearbeiten',
       'authError': 'Anmeldung fehlgeschlagen. Bitte erneut versuchen.',
       'authEmailExists': 'Diese E-Mail ist bereits registriert. Melde dich an oder verwende eine andere E-Mail.',
       'authInvalidEmail':
@@ -345,6 +483,41 @@ class AppStrings {
       'updated': 'Actualizada el',
       'contact': 'Creado por Francesco Fasolato',
       'language': 'Idioma',
+      'appName': 'BoardGamePlayer',
+      'gameName': 'Nombre de la partida',
+      'gameNameHint': 'P. ej. Viernes nocturno',
+      'editGame': 'Editar partida',
+      'newGameDialog': 'Nueva partida',
+      'deleteGame': 'Eliminar partida',
+      'deleteGameDescription':
+          'También se eliminarán los jugadores y sus estadísticas de "{name}".',
+      'playerName': 'Nombre del jugador',
+      'editPlayerName': 'Editar nombre',
+      'chooseIcon': 'Elegir avatar',
+      'iconNumber': 'Avatar {number}',
+      'role': 'Rol',
+      'roleHint': 'P. ej. Presidente, Gestor…',
+      'player': 'Jugador',
+      'firstPlayerBadge': 'PRIMERO',
+      'startTurn': 'Empieza el turno',
+      'moveUp': 'Mover jugador arriba',
+      'moveDown': 'Mover jugador abajo',
+      'removePlayer': 'Eliminar jugador',
+      'removePlayerDescription': '¿Quieres eliminar a {name}?',
+      'time': 'Tiempo',
+      'turns': 'Turnos',
+      'score': 'Puntuación',
+      'stopTimer': 'Detener temporizador',
+      'pause': 'Pausar',
+      'play': 'Jugar',
+      'resetStats': 'Restablecer estadísticas',
+      'resetStatsDescription':
+          '¿Quieres restablecer las estadísticas de todos los jugadores?',
+      'reset': 'RESTABLECER',
+      'turnsValue': 'Turnos (0-99)',
+      'scoreValue': 'Puntuación',
+      'editTurns': 'Editar turnos',
+      'editScore': 'Editar puntuación',
       'authError': 'No se pudo iniciar sesión. Inténtalo de nuevo.',
       'authEmailExists': 'Este correo ya está registrado. Intenta iniciar sesión o usa otro correo.',
       'authInvalidEmail': 'Este correo no es válido. Comprueba el formato e inténtalo de nuevo.',
@@ -390,6 +563,40 @@ class AppStrings {
       'updated': 'Atualizado em',
       'contact': 'Criado por Francesco Fasolato',
       'language': 'Idioma',
+      'appName': 'BoardGamePlayer',
+      'gameName': 'Nome do jogo',
+      'gameNameHint': 'Ex.: Sexta-feira à noite',
+      'editGame': 'Editar jogo',
+      'newGameDialog': 'Novo jogo',
+      'deleteGame': 'Eliminar jogo',
+      'deleteGameDescription': 'Os jogadores e as suas estatísticas também serão eliminados de "{name}".',
+      'playerName': 'Nome do jogador',
+      'editPlayerName': 'Editar nome',
+      'chooseIcon': 'Escolher avatar',
+      'iconNumber': 'Avatar {number}',
+      'role': 'Função',
+      'roleHint': 'Ex.: Presidente, Gestor…',
+      'player': 'Jogador',
+      'firstPlayerBadge': 'PRIMEIRO',
+      'startTurn': 'Começar o turno',
+      'moveUp': 'Mover jogador para cima',
+      'moveDown': 'Mover jogador para baixo',
+      'removePlayer': 'Eliminar jogador',
+      'removePlayerDescription': 'Quer eliminar {name}?',
+      'time': 'Tempo',
+      'turns': 'Turnos',
+      'score': 'Pontuação',
+      'stopTimer': 'Parar temporizador',
+      'pause': 'Pausar',
+      'play': 'Jogar',
+      'resetStats': 'Redefinir estatísticas',
+      'resetStatsDescription':
+          'Quer redifinir as estatísticas de todos os jogadores?',
+      'reset': 'REDEFINIR',
+      'turnsValue': 'Turnos (0-99)',
+      'scoreValue': 'Pontuação',
+      'editTurns': 'Editar turnos',
+      'editScore': 'Editar pontuação',
       'authError': 'Não foi possível entrar. Tente novamente.',
       'authEmailExists': 'Este e-mail já está registado. Tente iniciar sessão ou use outro e-mail.',
       'authInvalidEmail':
@@ -436,6 +643,40 @@ class AppStrings {
       'updated': 'Обновлено',
       'contact': 'Создано Франческо Фасолато',
       'language': 'Язык',
+      'appName': 'BoardGamePlayer',
+      'gameName': 'Название игры',
+      'gameNameHint': 'Например, пятница вечером',
+      'editGame': 'Изменить игру',
+      'newGameDialog': 'Новая игра',
+      'deleteGame': 'Удалить игру',
+      'deleteGameDescription':
+          'Игроки и их статистика также будут удалены из "{name}".',
+      'playerName': 'Имя игрока',
+      'editPlayerName': 'Изменить имя',
+      'chooseIcon': 'Выбрать аватар',
+      'iconNumber': 'Аватар {number}',
+      'role': 'Роль',
+      'roleHint': 'Например, президент, менеджер…',
+      'player': 'Игрок',
+      'firstPlayerBadge': 'ПЕРВЫЙ',
+      'startTurn': 'Начать ход',
+      'moveUp': 'Переместить игрока вверх',
+      'moveDown': 'Переместить игрока вниз',
+      'removePlayer': 'Удалить игрока',
+      'removePlayerDescription': 'Вы хотите удалить {name}?',
+      'time': 'Время',
+      'turns': 'Ходы',
+      'score': 'Баллы',
+      'stopTimer': 'Остановить таймер',
+      'pause': 'Пауза',
+      'play': 'Играть',
+      'resetStats': 'Сбросить статистику',
+      'resetStatsDescription': 'Вы хотите сбросить статистику всех игроков?',
+      'reset': 'СБРОС',
+      'turnsValue': 'Ходы (0-99)',
+      'scoreValue': 'Баллы',
+      'editTurns': 'Изменить ходы',
+      'editScore': 'Изменить баллы',
       'authError': 'Не удалось войти. Повторите попытку.',
       'authEmailExists': 'Этот адрес уже зарегистрирован. Попробуйте войти в аккаунт или используйте другой email.',
       'authInvalidEmail':
@@ -481,6 +722,39 @@ class AppStrings {
       'updated': '更新于',
       'contact': '由 Francesco Fasolato 创建',
       'language': '语言',
+      'appName': 'BoardGamePlayer',
+      'gameName': '游戏名称',
+      'gameNameHint': '例如：周五晚间',
+      'editGame': '编辑游戏',
+      'newGameDialog': '新游戏',
+      'deleteGame': '删除游戏',
+      'deleteGameDescription': '玩家及其统计数据也将从“{name}”中删除。',
+      'playerName': '玩家名称',
+      'editPlayerName': '编辑名称',
+      'chooseIcon': '选择头像',
+      'iconNumber': '头像 {number}',
+      'role': '角色',
+      'roleHint': '例如：总统、经理…',
+      'player': '玩家',
+      'firstPlayerBadge': '首位',
+      'startTurn': '开始回合',
+      'moveUp': '将玩家向上移动',
+      'moveDown': '将玩家向下移动',
+      'removePlayer': '删除玩家',
+      'removePlayerDescription': '要删除 {name} 吗？',
+      'time': '时间',
+      'turns': '回合',
+      'score': '分数',
+      'stopTimer': '停止计时器',
+      'pause': '暂停',
+      'play': '开始',
+      'resetStats': '重置统计数据',
+      'resetStatsDescription': '要重置所有玩家的统计数据吗？',
+      'reset': '重置',
+      'turnsValue': '回合（0-99）',
+      'scoreValue': '分数',
+      'editTurns': '编辑回合',
+      'editScore': '编辑分数',
       'authError': '登录失败，请重试。',
       'authEmailExists': '该邮箱已注册。请直接登录或使用其他邮箱。',
       'authInvalidEmail': '邮箱格式无效。请检查后重试。',
@@ -523,6 +797,39 @@ class AppStrings {
       'updated': '更新日',
       'contact': 'Francesco Fasolato 作',
       'language': '言語',
+      'appName': 'BoardGamePlayer',
+      'gameName': 'ゲーム名',
+      'gameNameHint': '例：金曜日の夜',
+      'editGame': 'ゲームを編集',
+      'newGameDialog': '新しいゲーム',
+      'deleteGame': 'ゲームを削除',
+      'deleteGameDescription': 'プレイヤーとその統計データも「{name}」から削除されます。',
+      'playerName': 'プレイヤー名',
+      'editPlayerName': '名前を編集',
+      'chooseIcon': 'アイコンを選択',
+      'iconNumber': 'アイコン {number}',
+      'role': '役割',
+      'roleHint': '例：社長、管理者…',
+      'player': 'プレイヤー',
+      'firstPlayerBadge': '最初',
+      'startTurn': 'ターンを開始',
+      'moveUp': 'プレイヤーを上に移動',
+      'moveDown': 'プレイヤーを下に移動',
+      'removePlayer': 'プレイヤーを削除',
+      'removePlayerDescription': '{name} を削除しますか？',
+      'time': '時間',
+      'turns': 'ターン',
+      'score': '得点',
+      'stopTimer': 'タイマーを停止',
+      'pause': '一時停止',
+      'play': '開始',
+      'resetStats': '統計をリセット',
+      'resetStatsDescription': 'すべてのプレイヤーの統計データをリセットしますか？',
+      'reset': 'リセット',
+      'turnsValue': 'ターン（0-99）',
+      'scoreValue': '得点',
+      'editTurns': 'ターンを編集',
+      'editScore': '得点を編集',
       'authError': 'ログインできませんでした。もう一度お試しください。',
       'authEmailExists': 'このメールアドレスはすでに登録されています。ログインするか別のメールアドレスをお使いください。',
       'authInvalidEmail': 'メールアドレスの形式が正しくありません。確認してもう一度お試しください。',
@@ -539,6 +846,14 @@ class AppStrings {
   };
 
   String text(String key) => _values[_language]?[key] ?? _values['en']![key]!;
+
+  String format(String key, Map<String, Object> values) {
+    String result = text(key);
+    for (final MapEntry<String, Object> entry in values.entries) {
+      result = result.replaceAll('{${entry.key}}', entry.value.toString());
+    }
+    return result;
+  }
 
   String authErrorForCode(String code) {
     final Map<String, String> values = _values[_language] ?? _values['en']!;
@@ -1656,6 +1971,7 @@ class Player {
 
   final int id;
   String name;
+  String role = '';
   int iconIndex;
   Duration elapsed = Duration.zero;
   TimerState timerState = TimerState.stopped;
@@ -1669,6 +1985,7 @@ class Player {
   Map<String, dynamic> toJson() => <String, dynamic>{
     'id': id,
     'name': name,
+    'role': role,
     'iconIndex': iconIndex,
     'elapsed': elapsed.inSeconds,
     'turns': turns,
@@ -1682,6 +1999,7 @@ class Player {
       name: json['name'] as String,
       iconIndex: (json['iconIndex'] as int?) ?? 0,
     );
+    player.role = json['role'] as String? ?? '';
     player.elapsed = Duration(seconds: (json['elapsed'] as int?) ?? 0);
     player.turns = ((json['turns'] as int?) ?? 0).clamp(0, 99);
     player.score = (json['score'] as num?)?.toDouble() ?? 0;
@@ -1972,28 +2290,33 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
   }
 
   Future<String?> gameNameDialog({String? initial}) async {
+    final AppStrings strings = AppStrings.of(context);
     final TextEditingController controller = TextEditingController(
       text: initial,
     );
     final String? name = await showDialog<String>(
       context: context,
       builder: (BuildContext dialogContext) => AlertDialog(
-        title: Text(initial == null ? 'Nuova partita' : 'Modifica partita'),
+        title: Text(
+          initial == null
+              ? strings.text('newGameDialog')
+              : strings.text('editGame'),
+        ),
         content: TextField(
           controller: controller,
           autofocus: true,
           maxLength: 60,
           textCapitalization: TextCapitalization.sentences,
-          decoration: const InputDecoration(
-            labelText: 'Nome della partita',
-            hintText: 'Es. Serata del venerdì',
-            border: OutlineInputBorder(),
+          decoration: InputDecoration(
+            labelText: strings.text('gameName'),
+            hintText: strings.text('gameNameHint'),
+            border: const OutlineInputBorder(),
           ),
         ),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('ANNULLA'),
+            child: Text(strings.text('cancel')),
           ),
           FilledButton(
             onPressed: () {
@@ -2002,7 +2325,7 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
                 Navigator.pop(dialogContext, value);
               }
             },
-            child: const Text('SALVA'),
+            child: Text(strings.text('save')),
           ),
         ],
       ),
@@ -2024,21 +2347,22 @@ class _GamesPageState extends State<GamesPage> with WidgetsBindingObserver {
   }
 
   Future<void> deleteGame(Game game) async {
+    final AppStrings strings = AppStrings.of(context);
     final bool? confirmed = await showDialog<bool>(
       context: context,
       builder: (BuildContext dialogContext) => AlertDialog(
-        title: const Text('Elimina partita'),
+        title: Text(strings.text('deleteGame')),
         content: Text(
-          'Saranno eliminati anche giocatori e statistiche di "${game.name}".',
+          strings.format('deleteGameDescription', {'name': game.name}),
         ),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, false),
-            child: const Text('ANNULLA'),
+            child: Text(strings.text('cancel')),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(dialogContext, true),
-            child: const Text('ELIMINA'),
+            child: Text(strings.text('delete')),
           ),
         ],
       ),
@@ -2381,6 +2705,43 @@ class _GameDetailPageState extends State<GameDetailPage>
     await widget.store.save(widget.games);
   }
 
+  Future<void> resetStats() async {
+    final AppStrings strings = AppStrings.of(context);
+    final bool? confirmed = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext dialogContext) => AlertDialog(
+        title: Text(strings.text('resetStats')),
+        content: Text(strings.text('resetStatsDescription')),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(strings.text('cancel')),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(strings.text('reset')),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
+
+    for (final Player player in game.players) {
+      player.elapsed = Duration.zero;
+      player.turns = 0;
+      player.score = 0;
+      player.scoreStep = 1;
+      player.timerState = TimerState.stopped;
+      player.timer?.cancel();
+      player.timer = null;
+    }
+    game.selectedFirstPlayerId = game.players.isEmpty
+        ? null
+        : game.players.first.id;
+    await save();
+    if (mounted) setState(() {});
+  }
+
   Future<String?> textDialog({
     required String title,
     required String label,
@@ -2389,6 +2750,7 @@ class _GameDetailPageState extends State<GameDetailPage>
     TextInputType? keyboardType,
     List<TextInputFormatter>? formatters,
   }) async {
+    final AppStrings strings = AppStrings.of(context);
     final TextEditingController controller = TextEditingController(
       text: initial,
     );
@@ -2409,14 +2771,14 @@ class _GameDetailPageState extends State<GameDetailPage>
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('ANNULLA'),
+            child: Text(strings.text('cancel')),
           ),
           FilledButton(
             onPressed: () {
               final String result = controller.text.trim();
               if (isValid(result)) Navigator.pop(dialogContext, result);
             },
-            child: const Text('SALVA'),
+            child: Text(strings.text('save')),
           ),
         ],
       ),
@@ -2426,9 +2788,12 @@ class _GameDetailPageState extends State<GameDetailPage>
   }
 
   Future<void> addOrEditPlayer({Player? player}) async {
+    final AppStrings strings = AppStrings.of(context);
     final String? name = await textDialog(
-      title: player == null ? 'Aggiungi giocatore' : 'Modifica nome',
-      label: 'Nome del giocatore',
+      title: player == null
+          ? strings.text('addPlayer')
+          : strings.text('editPlayerName'),
+      label: strings.text('playerName'),
       initial: player?.name,
       isValid: (String value) =>
           RegExp(r'[A-Za-zÀ-ÿ]').hasMatch(value) &&
@@ -2460,35 +2825,39 @@ class _GameDetailPageState extends State<GameDetailPage>
     await save();
   }
 
-  Future<int?> choosePlayerIcon(int currentIndex) => showDialog<int>(
-    context: context,
-    builder: (BuildContext dialogContext) => AlertDialog(
-      title: const Text('Scegli miniatura'),
-      content: Wrap(
-        spacing: 8,
-        runSpacing: 8,
-        children: List<Widget>.generate(playerIcons.length, (int index) {
-          return IconButton(
-            onPressed: () => Navigator.pop(dialogContext, index),
-            isSelected: index == currentIndex,
-            icon: Icon(playerIcons[index]),
-            tooltip: 'Miniatura ${index + 1}',
-          );
-        }),
-      ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () => Navigator.pop(dialogContext),
-          child: const Text('ANNULLA'),
+  Future<int?> choosePlayerIcon(int currentIndex) async {
+    final AppStrings strings = AppStrings.of(context);
+    return showDialog<int>(
+      context: context,
+      builder: (BuildContext dialogContext) => AlertDialog(
+        title: Text(strings.text('chooseIcon')),
+        content: Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: List<Widget>.generate(playerIcons.length, (int index) {
+            return IconButton(
+              onPressed: () => Navigator.pop(dialogContext, index),
+              isSelected: index == currentIndex,
+              icon: Icon(playerIcons[index]),
+              tooltip: strings.format('iconNumber', {'number': index + 1}),
+            );
+          }),
         ),
-      ],
-    ),
-  );
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(strings.text('cancel')),
+          ),
+        ],
+      ),
+    );
+  }
 
   Future<void> editTurns(Player player) async {
+    final AppStrings strings = AppStrings.of(context);
     final String? value = await textDialog(
-      title: 'Modifica turni',
-      label: 'Turni (0-99)',
+      title: strings.text('editTurns'),
+      label: strings.text('turnsValue'),
       initial: '${player.turns}',
       isValid: (String value) {
         final int? parsed = int.tryParse(value);
@@ -2505,9 +2874,10 @@ class _GameDetailPageState extends State<GameDetailPage>
   }
 
   Future<void> editScore(Player player) async {
+    final AppStrings strings = AppStrings.of(context);
     final String? value = await textDialog(
-      title: 'Modifica punteggio',
-      label: 'Punteggio',
+      title: strings.text('editScore'),
+      label: strings.text('scoreValue'),
       initial: formatNumber(player.score),
       isValid: (String value) =>
           double.tryParse(value.replaceAll(',', '.')) != null &&
@@ -2529,20 +2899,37 @@ class _GameDetailPageState extends State<GameDetailPage>
     }
   }
 
+  Future<void> movePlayer(int index, int direction) async {
+    final int targetIndex = index + direction;
+    if (targetIndex < 0 || targetIndex >= game.players.length) return;
+    final Player player = game.players[index];
+    setState(() {
+      game.players.removeAt(index);
+      game.players.insert(targetIndex, player);
+      if (game.selectedFirstPlayerId == player.id) {
+        game.selectedFirstPlayerId = player.id;
+      }
+    });
+    await save();
+  }
+
   Future<void> removePlayer(Player player) async {
+    final AppStrings strings = AppStrings.of(context);
     final bool? confirmed = await showDialog<bool>(
       context: context,
       builder: (BuildContext dialogContext) => AlertDialog(
-        title: const Text('Elimina giocatore'),
-        content: Text('Vuoi eliminare ${player.name}?'),
+        title: Text(strings.text('removePlayer')),
+        content: Text(
+          strings.format('removePlayerDescription', {'name': player.name}),
+        ),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, false),
-            child: const Text('ANNULLA'),
+            child: Text(strings.text('cancel')),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(dialogContext, true),
-            child: const Text('ELIMINA'),
+            child: Text(strings.text('delete')),
           ),
         ],
       ),
@@ -2657,7 +3044,14 @@ class _GameDetailPageState extends State<GameDetailPage>
           },
         ),
         title: Text(game.name),
-        actions: const <Widget>[LanguagePicker()],
+        actions: <Widget>[
+          const LanguagePicker(),
+          IconButton(
+            onPressed: resetStats,
+            tooltip: strings.text('resetStats'),
+            icon: const Icon(Icons.restart_alt_rounded),
+          ),
+        ],
       ),
       body: BoardBackdrop(
         child: SafeArea(
@@ -2667,7 +3061,7 @@ class _GameDetailPageState extends State<GameDetailPage>
               child: Stack(
                 children: <Widget>[
                   game.players.isEmpty
-                      ? const Center(child: Text('Nessun giocatore presente'))
+                      ? Center(child: Text(strings.text('noPlayers')))
                       : ListView.separated(
                           controller: _scrollController,
                           padding: const EdgeInsets.fromLTRB(16, 16, 16, 150),
@@ -2691,6 +3085,12 @@ class _GameDetailPageState extends State<GameDetailPage>
                               onStopTimer: () => stopTimer(player),
                               onTurnsEdit: () => editTurns(player),
                               onScoreEdit: () => editScore(player),
+                              onRoleChanged: (String value) {
+                                setState(() => player.role = value);
+                                unawaited(save());
+                              },
+                              onMoveUp: () => movePlayer(index, -1),
+                              onMoveDown: () => movePlayer(index, 1),
                               onTurnChange: (int value) {
                                 setState(() {
                                   player.turns = (player.turns + value).clamp(
@@ -2725,7 +3125,7 @@ class _GameDetailPageState extends State<GameDetailPage>
                           FloatingActionButton(
                             heroTag: 'add-player',
                             onPressed: () => addOrEditPlayer(),
-                            tooltip: 'Aggiungi giocatore',
+                            tooltip: strings.text('addPlayer'),
                             backgroundColor: AppDesign.teal,
                             foregroundColor: AppDesign.ink,
                             elevation: 10,
@@ -2762,6 +3162,9 @@ class PlayerCard extends StatelessWidget {
     required this.onStopTimer,
     required this.onTurnsEdit,
     required this.onScoreEdit,
+    required this.onRoleChanged,
+    required this.onMoveUp,
+    required this.onMoveDown,
     required this.onTurnChange,
     required this.onScoreChange,
     required this.onStepChange,
@@ -2779,6 +3182,9 @@ class PlayerCard extends StatelessWidget {
   final VoidCallback onStopTimer;
   final VoidCallback onTurnsEdit;
   final VoidCallback onScoreEdit;
+  final ValueChanged<String> onRoleChanged;
+  final VoidCallback onMoveUp;
+  final VoidCallback onMoveDown;
   final ValueChanged<int> onTurnChange;
   final ValueChanged<double> onScoreChange;
   final ValueChanged<double?> onStepChange;
@@ -2786,6 +3192,7 @@ class PlayerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppStrings strings = AppStrings.of(context);
     final BorderSide selectedBorder = BorderSide(
       color: isSelected ? AppDesign.gold : Colors.transparent,
       width: isSelected ? 2 : 1,
@@ -2861,7 +3268,7 @@ class PlayerCard extends StatelessWidget {
                                 color: AppDesign.gold.withValues(alpha: 0.42),
                               ),
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
                                 Icon(
@@ -2871,7 +3278,7 @@ class PlayerCard extends StatelessWidget {
                                 ),
                                 SizedBox(width: 4),
                                 Text(
-                                  'PRIMO',
+                                  strings.text('firstPlayerBadge'),
                                   style: TextStyle(
                                     color: AppDesign.goldSoft,
                                     fontWeight: FontWeight.w800,
@@ -2886,13 +3293,45 @@ class PlayerCard extends StatelessWidget {
                     ),
                   ),
                   subtitle: Text(
-                    isSelected ? 'Inizia il turno' : 'Giocatore',
+                    isSelected
+                        ? strings.text('startTurn')
+                        : strings.text('player'),
                     style: const TextStyle(color: AppDesign.textMuted),
                   ),
-                  trailing: IconButton(
-                    onPressed: onRemove,
-                    icon: const Icon(Icons.close),
-                    tooltip: 'Elimina giocatore',
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      IconButton(
+                        onPressed: onMoveUp,
+                        icon: const Icon(Icons.arrow_upward_rounded),
+                        tooltip: strings.text('moveUp'),
+                      ),
+                      IconButton(
+                        onPressed: onMoveDown,
+                        icon: const Icon(Icons.arrow_downward_rounded),
+                        tooltip: strings.text('moveDown'),
+                      ),
+                      IconButton(
+                        onPressed: onRemove,
+                        icon: const Icon(Icons.close),
+                        tooltip: strings.text('removePlayer'),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: TextFormField(
+                    initialValue: player.role,
+                    onFieldSubmitted: (String value) {
+                      onRoleChanged(value.trim());
+                    },
+                    onChanged: (String value) => onRoleChanged(value),
+                    decoration: InputDecoration(
+                      labelText: strings.text('role'),
+                      hintText: strings.text('roleHint'),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                    ),
                   ),
                 ),
                 const Divider(height: 1),
@@ -2905,7 +3344,7 @@ class PlayerCard extends StatelessWidget {
                     runSpacing: 16,
                     children: <Widget>[
                       ControlColumn(
-                        label: 'Tempo',
+                        label: strings.text('time'),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
@@ -2915,7 +3354,7 @@ class PlayerCard extends StatelessWidget {
                                 Icons.stop_rounded,
                                 color: AppDesign.danger,
                               ),
-                              tooltip: 'Azzera timer',
+                              tooltip: strings.text('stopTimer'),
                             ),
                             Text(formatDuration(player.elapsed)),
                             IconButton(
@@ -2929,14 +3368,14 @@ class PlayerCard extends StatelessWidget {
                                     : AppDesign.teal,
                               ),
                               tooltip: player.timerState == TimerState.running
-                                  ? 'Pausa'
-                                  : 'Avvia',
+                                  ? strings.text('pause')
+                                  : strings.text('play'),
                             ),
                           ],
                         ),
                       ),
                       ControlColumn(
-                        label: 'Turni',
+                        label: strings.text('turns'),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
@@ -2965,7 +3404,7 @@ class PlayerCard extends StatelessWidget {
                         ),
                       ),
                       ControlColumn(
-                        label: 'Punteggio',
+                        label: strings.text('score'),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
